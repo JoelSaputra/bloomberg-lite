@@ -1,11 +1,17 @@
 import react from 'react';
 
-function StockCard(){
+export default function StockCard({symbol, name, price, changePercent, volume, isPositive}){
     return(
-        <>
+        <div>
+            <div>
+                <h3>{symbol}</h3>
+                <p>{name}</p>
+            </div>
 
-        
-        </>
+
+
+                </div>
     );
 
 }
+

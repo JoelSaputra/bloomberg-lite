@@ -1,4 +1,5 @@
 
+
 function App() {
   return (
     <div className="
@@ -26,13 +27,11 @@ function App() {
           <p className="text-sm text-slate-400">
              Monitor your favorite stocks in real-time
           </p>
+
+  
+
         </section>
-
       </main>
-
-
-
-
     </div>
   );
 }
