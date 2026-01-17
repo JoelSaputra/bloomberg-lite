@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+/* Define your custom theme for Bloomberg Terminal */
+@theme {
+  --color-terminal-dark: #121212;
+  --color-terminal-card: #1a1a1a;
+  --color-terminal-border: #2a2a2a;
+  --color-positive: #4caf50;
+  --color-negative: #f44336;
+  --font-terminal: 'Courier New', Monaco, 'Roboto Mono', monospace;
+}
+
+/* Custom base styles */
+@layer base {
+  body {
+    background-color: var(--color-terminal-dark);
+    color: #ffffff;
+    font-family: var(--font-terminal);
+    margin: 0;
+  }
+}
