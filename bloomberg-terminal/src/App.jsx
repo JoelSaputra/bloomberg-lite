@@ -13,7 +13,7 @@ function App() {
       <header className="mb-8 border-b border-white/10 pb-4">
   <div className="flex items-center gap-3">
     <span className="text-blue-400 text-xl font-bold tracking-tight">
-      IQ TERMINAL
+      THE CLOSED TERMINAL
     </span>
     <span className="text-xs text-slate-400 mt-1">
       Professional Trading Platform
@@ -30,11 +30,8 @@ function App() {
              Monitor your favorite stocks in real-time
           </p>
 
-          <div className="flex flex-wrap gap-4 mt-4">
-            {mockStocks.map((stock)=> (
-             <StockCard key={stock.symbol} {...stock} />
-
-            ))}
+          <div className="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 auto-rows-[290px]">
+          {mockStocks.map((s) => <StockCard key={s.symbol} {...s} />)}
           </div>
 
         </section>
