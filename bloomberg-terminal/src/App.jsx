@@ -1,6 +1,8 @@
-
+import mockStocks from './data/MockTestStock';
+import StockCard from './components/watchlist/StockCard'; 
 
 function App() {
+  
   return (
     <div className="
   min-h-screen 
@@ -28,10 +30,18 @@ function App() {
              Monitor your favorite stocks in real-time
           </p>
 
-  
+          <div className="flex flex-wrap gap-4 mt-4">
+            {mockStocks.map((stock)=> (
+             <StockCard key={stock.symbol} {...stock} />
+
+            ))}
+          </div>
 
         </section>
       </main>
+
+
+
     </div>
   );
 }
