@@ -3,7 +3,8 @@
 
 @layer components {
   .mini-terminal-watchlist{
-    @apply rounded-2xl p-6
+    @apply 
+    rounded-2xl p-6
     bg-[#131c2a]/90
     border border-white/10
     shadow-[0_18px_60px_-30px_rgba(0,0,0,0.9)]
