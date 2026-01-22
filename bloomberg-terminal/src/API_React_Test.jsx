@@ -13,7 +13,7 @@ export default function API_React_Test() {
                 
                 const url = new URL(baseUrl + '/v1/company/profile');
                 
-                const response = await fetch(url.toString + `?companyKey=${companyKey}&apiKey=${apiKey}`)
+            
 
 
             }
