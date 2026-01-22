@@ -11,7 +11,6 @@ export default function API_React_Test() {
                 const baseUrl = import.meta.env.VITE_FISCAL_BASE_URL;
                 const companyKey = "NASDAQ_MSFT";
                 
-                const url = new URL(baseUrl + '/v1/company/profile');
                 
             
 
