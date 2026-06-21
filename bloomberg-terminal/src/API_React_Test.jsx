@@ -10,7 +10,7 @@ export default function API_React_Test() {
             try{
                 
                 const api_key = import.meta.env.VITE_FISCAL_API_KEY; // Ensure your API key is stored in environment variables
-                console.log(import.meta.env.VITE_FISCAL_API_KEY);
+                
 
                 const url = `https://api.fiscal.ai/v1/company/profile?companyKey=NASDAQ_MSFT&apiKey=${api_key}`; //example for using URL template literals
 
