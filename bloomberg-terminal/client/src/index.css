@@ -12,7 +12,7 @@ body{
 }
 
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:is(.dark *)); /* custom dark mode */
 
 :root {
   --font-size: 16px;
@@ -55,7 +55,7 @@ body{
   --sidebar-ring: #10b981;
 }
 
-.dark {
+.darkDONT-USE-YET {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.145 0 0);
