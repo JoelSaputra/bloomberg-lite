@@ -1,5 +1,5 @@
 import React from 'react'
-import StockCard from './components/watchlist/StockCard'
+import StockCard from './components/StockCard'
 
 const App = () => {
   return (
