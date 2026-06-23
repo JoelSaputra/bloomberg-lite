@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 
 const SideBar = () => {
-  const [collapsed, setCollapsed] = useState(false)
+  const [collapsed, setCollapsed] = useState(true)
 
   return (
     <>
