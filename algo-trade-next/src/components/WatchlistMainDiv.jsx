@@ -25,7 +25,7 @@ const WatchlistMainDiv = () => {
   </thead>
   <tbody>
     {stocks.map((stocks)=>
-      <WatchlistStocks key={stocks} stocks={stocks} />
+      <WatchlistStocks key={stocks}stocks={stocks} />
     )}
     
   </tbody>

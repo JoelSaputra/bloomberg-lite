@@ -22,8 +22,8 @@ const SideBar = ({collapsed, setCollapsed}) => {
         </div>
 
         {/* Navigation Items */}
-        <nav className="py-3 px-2 flex flex-col">
-          <Link href="/watchlist">W</Link>
+        <nav className="py-3 px-2 flex flex-col text-sm gap-y-6">
+          <Link href="/watchlist">Watchlist</Link>
           <Link href="/market-trend">M</Link>
         </nav>
 
