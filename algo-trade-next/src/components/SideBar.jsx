@@ -22,8 +22,9 @@ const SideBar = ({collapsed, setCollapsed}) => {
         </div>
 
         {/* Navigation Items */}
-        <nav className="py-3 px-2">
+        <nav className="py-3 px-2 flex flex-col">
           <Link href="/watchlist">W</Link>
+          <Link href="/market-trend">M</Link>
         </nav>
 
         {/* Collapse Toggle */}

@@ -10,7 +10,7 @@ const Sparkline = ({ data }) => {
         <Line
           type="monotone"
           dataKey="value"
-          stroke={isPositive ? '#10b981' : '#ef4444'}
+          stroke={isPositive ? '#10b981' : '#f26666'}
           strokeWidth={1.5}
           dot={false}
         />
