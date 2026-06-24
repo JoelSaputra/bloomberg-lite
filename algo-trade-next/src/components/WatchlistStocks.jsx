@@ -1,5 +1,6 @@
 // WatchlistStocks.jsx
 import React from 'react'
+import Sparkline from './charts/Sparkline'
 
 const WatchlistStocks = ({ stocks }) => {
   return (
@@ -20,9 +21,11 @@ const WatchlistStocks = ({ stocks }) => {
     </span>
   </td>
 
-  <td className="text-center py-4 pl-10">
-    <span className="text-white tracking-tighter font-data">lineeeeee</span>
-  </td>
+    <td className="text-center py-4 pl-10 pt-8">
+        <div className="flex justify-center">
+         <Sparkline data={stocks.change7d} />
+        </div>
+    </td>
 
   <td className="text-center py-4 pl-10">
     <span className="text-[14px] text-neutral-300 tracking-tighter font-data">{stocks.volume}</span>
