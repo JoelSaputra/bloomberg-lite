@@ -1,8 +1,9 @@
 // components/SideBar.jsx
 import React, { useState } from 'react'
+import Link from 'next/link'
 
-const SideBar = () => {
-  const [collapsed, setCollapsed] = useState(true)
+const SideBar = ({collapsed, setCollapsed}) => {
+
 
   return (
     <>
@@ -22,7 +23,7 @@ const SideBar = () => {
 
         {/* Navigation Items */}
         <nav className="py-3 px-2">
-          {/* Nav links go here */}
+          <Link href="/watchlist">W</Link>
         </nav>
 
         {/* Collapse Toggle */}
