@@ -5,7 +5,7 @@ import mockStocks from '@/data/MockTestStock'
 import WatchlistStocks from './WatchlistStocks';
 
 const WatchlistMainDiv = () => {
-  const [stocks, setStocks] = useState(mockStocks[0]);
+  const [stocks, setStocks] = useState(mockStocks);
 
   return (
     <div className="w-full bg-card border border-border rounded-md min-h-screen pt-2 pb-5">
@@ -24,7 +24,10 @@ const WatchlistMainDiv = () => {
     </tr>
   </thead>
   <tbody>
-    <WatchlistStocks stocks={stocks} />
+    {stocks.map((stocks)=>
+      <WatchlistStocks key={stocks} stocks={stocks} />
+    )}
+    
   </tbody>
 </table>
     </div>
