@@ -1,6 +1,9 @@
 import React from 'react'
 import FundamentalOverview from '@/components/FundamentalOverview'
+import {useState, useRef, useContext, createContext} from 'react'
 
+
+const StockContext = createContext()
 
 const fundamentalLab = () => {
   return (

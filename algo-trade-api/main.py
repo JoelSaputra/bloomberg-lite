@@ -15,7 +15,7 @@ def get_keyStatistics(symbol:str=Path(min_length=1, max_length=5)):
         stock = yf.Ticker(symbol)
         info = stock.info
 
-        if not info or symbol not in info:
+        if not info or "symbol" not in info:
             raise HTTPException(status_code=404, detail="Stock not found")
 
         return {
@@ -34,6 +34,9 @@ def get_keyStatistics(symbol:str=Path(min_length=1, max_length=5)):
             "currentRatio": info.get("currentRatio"),
 
         }
+
+    except HTTPException:
+        raise
 
     except Exception as e:
          raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}") 
