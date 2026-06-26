@@ -3,10 +3,10 @@ import FundamentalOverview from '@/components/FundamentalOverview'
 import {useState, useRef, useEffect ,useContext, createContext} from 'react'
 
 
+const StockContext = createContext()
 
 const fundamentalLab = () => {
 
-   const StockContext = createContext()
    const [symbol, setSymbol] = useState('AAPL')
    const [stockData, setStockData] = useState(null)
 
@@ -17,6 +17,7 @@ const fundamentalLab = () => {
          const data = await response.json()
 
          setStockData(data)
+         console.log(data)
          }
 
          catch(error) {
@@ -25,7 +26,6 @@ const fundamentalLab = () => {
       } 
 
       fetchStockData()
-      console.log(stockData)
    }, [symbol])
 
 
