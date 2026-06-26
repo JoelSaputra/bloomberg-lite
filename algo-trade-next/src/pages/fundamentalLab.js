@@ -9,10 +9,12 @@ const fundamentalLab = () => {
 
    const [symbol, setSymbol] = useState('AAPL')
    const [stockData, setStockData] = useState(null)
+   const [loading, setLoading] = useState(true)
 
    useEffect(() => {
       const fetchStockData = async () => {
          try{
+         setLoading(true)
          const response = await fetch(`http://localhost:8000/stock/${symbol}/fundamental/overview`)
          const data = await response.json()
 
@@ -23,10 +25,21 @@ const fundamentalLab = () => {
          catch(error) {
             alert("Error fetching stock data:", error)
          }
+         finally{
+            setLoading(false)
+         }
       } 
 
       fetchStockData()
    }, [symbol])
+
+   if (loading){
+      return (
+      <div>
+         Loading
+      </div>
+      )
+   }
 
 
   return (
@@ -38,7 +51,7 @@ const fundamentalLab = () => {
                             focus:ring-2 focus:ring-emerald-500 text-muted-foreground" 
                 type="search" 
                 placeholder='Search for symbol name...'/>
-            <h4>Apple</h4>
+            <h4>{stockData?.name}</h4>
          </div>
          
          <nav className="mt-8">
