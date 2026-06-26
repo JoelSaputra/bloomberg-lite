@@ -1,12 +1,36 @@
 import React from 'react'
 import FundamentalOverview from '@/components/FundamentalOverview'
-import {useState, useRef, useContext, createContext} from 'react'
+import {useState, useRef, useEffect ,useContext, createContext} from 'react'
 
 
-const StockContext = createContext()
 
 const fundamentalLab = () => {
+
+   const StockContext = createContext()
+   const [symbol, setSymbol] = useState('AAPL')
+   const [stockData, setStockData] = useState(null)
+
+   useEffect(() => {
+      const fetchStockData = async () => {
+         try{
+         const response = await fetch(`http://localhost:8000/stock/${symbol}/fundamental/overview`)
+         const data = await response.json()
+
+         setStockData(data)
+         }
+
+         catch(error) {
+            alert("Error fetching stock data:", error)
+         }
+      } 
+
+      fetchStockData()
+      console.log(stockData)
+   }, [symbol])
+
+
   return (
+   <StockContext.Provider value={{symbol, stockData, setStockData}}>
     <div className="flex flex-col">
         <div className="flex flex-row items-center space-x-5">
         <input className="bg-card text-gray-900 w-80 px-3 py-1.5 
@@ -27,6 +51,7 @@ const fundamentalLab = () => {
          </div>
 
     </div>
+    </StockContext.Provider>
   )
 }
 
