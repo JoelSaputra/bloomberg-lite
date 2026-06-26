@@ -3,7 +3,7 @@ import FundamentalOverview from '@/components/FundamentalOverview'
 import {useState, useRef, useEffect ,useContext, createContext} from 'react'
 
 
-const StockContext = createContext()
+export const StockContext = createContext()
 
 const fundamentalLab = () => {
 
@@ -51,7 +51,7 @@ const fundamentalLab = () => {
                             focus:ring-2 focus:ring-emerald-500 text-muted-foreground" 
                 type="search" 
                 placeholder='Search for symbol name...'/>
-            <h4>{stockData?.name}</h4>
+            <h4>{stockData.name}</h4>
          </div>
          
          <nav className="mt-8">
