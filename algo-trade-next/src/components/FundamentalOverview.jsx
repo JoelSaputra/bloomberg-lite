@@ -14,7 +14,7 @@ const FundamentalOverview = () => {
 
         <div className="w-[70%] min-h-110 bg-card rounded-md border">
             <h4 className="ml-5 mt-5 text-muted-foreground text-[15px]">
-                P/E RATIO vs 5-YEAR AVERAGE
+                P/E RATIO vs 4-YEAR AVERAGE
             </h4>
             <div className="ml-5 mt-3">
               <FundamentalOverview5yPE/>

@@ -7,7 +7,7 @@ export const StockContext = createContext()
 
 const fundamentalLab = () => {
 
-   const [symbol, setSymbol] = useState('AAPL')
+   const [symbol, setSymbol] = useState('MSFT')
    const [stockData, setStockData] = useState(null)
    const [loading, setLoading] = useState(true)
    const [peHistory, setPeHistory] = useState(null) 
@@ -23,6 +23,7 @@ const fundamentalLab = () => {
 
          setStockData(keyStatisticsData)
          setPeHistory(peData)
+         console.log(peData)
       
          }
 
