@@ -7,18 +7,19 @@ const FundamentalOverviewStatistics = () => {
 
     const {stockData} = useContext(StockContext)
 
-  const stats = [
-  { label: 'Market Cap',     value: stockData.marketCap ? `$${(stockData.marketCap / 1e12).toFixed(2)}T` : 'N/A' },
-  { label: 'P/E Ratio',      value: stockData.pe?.toFixed(1) ?? 'N/A' },
-  { label: 'P/B Ratio',      value: stockData.pb?.toFixed(1) ?? 'N/A' },
-  { label: 'ROE',            value: stockData.roe ? `${(stockData.roe * 100).toFixed(1)}%` : 'N/A' },
-  { label: 'Dividend Yield', value: stockData.divYield ? `${stockData.divYield.toFixed(2)}%` : 'N/A' },
-  { label: 'EPS (TTM)',      value: stockData.eps ? `$${stockData.eps.toFixed(2)}` : 'N/A' },
-  { label: 'Revenue (TTM)', value: stockData.revenue ? `$${(stockData.revenue / 1e9).toFixed(1)}B` : 'N/A' },
-  { label: 'Net Income',     value: stockData.netIncome ? `$${(stockData.netIncome / 1e9).toFixed(1)}B` : 'N/A' },
-  { label: 'Debt/Equity',    value: stockData.debtToEquity?.toFixed(2) ?? 'N/A' },
-  { label: 'Current Ratio',  value: stockData.currentRatio?.toFixed(2) ?? 'N/A' },
-]
+    const stats = [
+    { label: 'Market Cap',     value: stockData.marketCap ? `$${(stockData.marketCap / 1e9).toFixed(2)}B` : 'N/A' },
+    { label: 'P/E Ratio',      value: stockData.pe?.toFixed(1) ?? 'N/A' },
+    { label: 'P/B Ratio',      value: stockData.pb?.toFixed(1) ?? 'N/A' },
+    { label: 'ROE',            value: stockData.roe ? `${(stockData.roe * 100).toFixed(1)}%` : 'N/A' },
+    { label: 'Dividend Yield', value: stockData.divYield ? `${stockData.divYield.toFixed(2)}%` : 'N/A' },
+    { label: 'EPS (TTM)',      value: stockData.eps ? `$${stockData.eps.toFixed(2)}` : 'N/A' },
+    { label: 'Revenue (TTM)', value: stockData.revenue ? `$${(stockData.revenue / 1e9).toFixed(1)}B` : 'N/A' },
+    { label: 'Net Income',     value: stockData.netIncome ? `$${(stockData.netIncome / 1e9).toFixed(1)}B` : 'N/A' },
+    { label: 'Debt/Equity',    value: stockData.debtToEquity?.toFixed(2) ?? 'N/A' },
+    { label: 'Current Ratio',  value: stockData.currentRatio?.toFixed(2) ?? 'N/A' },
+  ]
+    
 
   return (
     <div>

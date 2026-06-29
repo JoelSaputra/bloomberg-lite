@@ -7,7 +7,7 @@ export const StockContext = createContext()
 
 const fundamentalLab = () => {
 
-   const [symbol, setSymbol] = useState('INTC')
+   const [symbol, setSymbol] = useState('AAPL')
    const [stockData, setStockData] = useState(null)
    const [loading, setLoading] = useState(true)
    const [peHistory, setPeHistory] = useState(null) 
