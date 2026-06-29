@@ -1,5 +1,6 @@
 import React from 'react'
 import FundamentalOverviewStatistics from './FundamentalOverviewStatistics'
+import FundamentalOverview5yPE from './charts/FundamentalOverview5yPE'
 
 const FundamentalOverview = () => {
   return (
@@ -15,6 +16,9 @@ const FundamentalOverview = () => {
             <h4 className="ml-5 mt-5 text-muted-foreground text-[15px]">
                 P/E RATIO vs 5-YEAR AVERAGE
             </h4>
+            <div className="ml-5 mt-3">
+              <FundamentalOverview5yPE/>
+            </div>
         </div>
     </div>
   )

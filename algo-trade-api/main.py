@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException, Path, status
 from fastapi.middleware.cors import CORSMiddleware
 import yfinance as yf
+import pandas as pd 
 
 
 
@@ -63,19 +64,19 @@ def get_pe_history(symbol:str=Path(min_length=1, max_length=5)):
 
         pe_history = []
 
-        for date, eps_value in eps.item():
+        for date, eps_value in eps.items():
+            if pd.isna(eps_value):
+                continue
+    
             year = date.year
-            year_prices = prices[prices.index]
+            year_prices = prices.loc[prices.index.year == year]
+            if not year_prices.empty and eps_value and eps_value != 0:
+                price = year_prices["Close"].iloc[-1]
+                pe = round(price / eps_value , 2)
+                pe_history.append({"year": str(year), "pe": pe})
 
-
-
-
-
-
-        return {
-            "prices" : prices["Close"].to_dict(), 
-            "eps" : eps.to_dict()
-        }
+        return { "pe_history": pe_history }
+        
 
     except HTTPException:
         raise 
@@ -84,5 +85,3 @@ def get_pe_history(symbol:str=Path(min_length=1, max_length=5)):
         raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
     
         
-
-

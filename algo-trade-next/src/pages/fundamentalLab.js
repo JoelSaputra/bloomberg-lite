@@ -10,16 +10,20 @@ const fundamentalLab = () => {
    const [symbol, setSymbol] = useState('AAPL')
    const [stockData, setStockData] = useState(null)
    const [loading, setLoading] = useState(true)
+   const [peHistory, setPeHistory] = useState(null) 
 
    useEffect(() => {
       const fetchStockData = async () => {
          try{
          setLoading(true)
-         const response = await fetch(`http://localhost:8000/stock/${symbol}/fundamental/overview`)
-         const data = await response.json()
+         const[keyStatisticsData, peData] = await Promise.all([
+            fetch(`http://localhost:8000/stock/${symbol}/fundamental/overview`).then(r => r.json()),
+            fetch(`http://localhost:8000/stock/${symbol}/fundamental/overview/pe-history`).then(r => r.json())
+         ])
 
-         setStockData(data)
-         console.log(data)
+         setStockData(keyStatisticsData)
+         setPeHistory(peData)
+      
          }
 
          catch(error) {
@@ -43,7 +47,7 @@ const fundamentalLab = () => {
 
 
   return (
-   <StockContext.Provider value={{symbol, stockData, setStockData}}>
+   <StockContext.Provider value={{symbol, stockData, setStockData, peHistory}}>
     <div className="flex flex-col">
         <div className="flex flex-row items-center space-x-5">
         <input className="bg-card text-gray-900 w-80 px-3 py-1.5 
