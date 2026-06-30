@@ -22,7 +22,7 @@ def root():
 
 
 @app.get("/stock/{symbol}/fundamental/overview")
-def get_keyStatistics(symbol:str=Path(min_length=1, max_length=5)):
+def get_keyStatistics(symbol:str=Path(min_length=1)):
     try:
         stock = yf.Ticker(symbol)
         info = stock.info
@@ -56,7 +56,7 @@ def get_keyStatistics(symbol:str=Path(min_length=1, max_length=5)):
 
 
 @app.get("/stock/{symbol}/fundamental/overview/pe-history")
-def get_pe_history(symbol:str=Path(min_length=1, max_length=5)):
+def get_pe_history(symbol:str=Path(min_length=1)):
     try:
         stock = yf.Ticker(symbol)
         prices = stock.history(period="5y")
