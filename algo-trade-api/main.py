@@ -87,7 +87,7 @@ def get_pe_history(symbol:str=Path(min_length=1)):
 
 
 @app.get("/stock/{symbol}/fundamental/income-statement")
-def get_income_statement(symbol: str = Path(min_length=1, max_length=5)):
+def get_income_statement(symbol: str = Path(min_length=1)):
     try:
         stock = yf.Ticker(symbol)
         financials = stock.financials
