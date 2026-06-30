@@ -128,10 +128,43 @@ def get_income_statement(symbol: str = Path(min_length=1)):
 
     
 @app.get("/stock/{symbol}/fundamental/balance-sheet")
-def get_balance_sheet(symbol:str=Path(min_length=1)):
-    stock = yf.Ticker(symbol)
-    balance_sheet = stock.balance_sheet
+def get_balance_sheet(symbol: str = Path(min_length=1)):
+    try:
+        stock = yf.Ticker(symbol)
+        balance_sheet = stock.balance_sheet
 
-    balance_sheet_history = []
+        balance_sheet_history = []
 
-    
+        for date in balance_sheet.columns:
+            year = date.year
+
+            def safe_get(row_name):
+                if row_name in balance_sheet.index:
+                    value = balance_sheet.loc[row_name, date]
+                    if hasattr(value, 'iloc'):
+                        value = value.iloc[0]
+                    return value
+                return None
+
+            total_assets = safe_get("Total Assets")
+            total_liabilities = safe_get("Total Liabilities Net Minority Interest")
+            equity = safe_get("Common Stock Equity")
+            cash = safe_get("Cash And Cash Equivalents")
+
+            balance_sheet_history.append({
+                "period": f"FY{year}",
+                "totalAssets": round(total_assets / 1e9, 1) if total_assets is not None and not pd.isna(total_assets) else None,
+                "totalLiabilities": round(total_liabilities / 1e9, 1) if total_liabilities is not None and not pd.isna(total_liabilities) else None,
+                "equity": round(equity / 1e9, 1) if equity is not None and not pd.isna(equity) else None,
+                "cash": round(cash / 1e9, 1) if cash is not None and not pd.isna(cash) else None,
+            })
+
+        return {"balance_sheet": balance_sheet_history}
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
+ 
+
+     

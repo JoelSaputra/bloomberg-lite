@@ -1,19 +1,24 @@
 import React from 'react'
 import FYstats from './FYstats'
 import IncomeBarGraph from './charts/IncomeBarGraph'
-import {useEffect, useState} from 'react'
+import {useEffect, useState, useContext} from 'react'
+import { StockContext } from '@/pages/fundamentalLab'
+
 
 
 const IncomeStatement = () => {
+    const {symbol} = useContext(StockContext)
     const [loading, setLoading] = useState(false)
     const [incomeStatement, setIncomeStatement] = useState(null)
+
+
 
     useEffect(() => {
         const fetchIncomeStatement = async () => {
 
             try{
                 setLoading(true)
-                const response = await fetch(`http://localhost:8000/stock/AAPL/fundamental/income-statement`)
+                const response = await fetch(`http://localhost:8000/stock/${symbol}/fundamental/income-statement`)
                 const data = await response.json()
             
                 setIncomeStatement(data)

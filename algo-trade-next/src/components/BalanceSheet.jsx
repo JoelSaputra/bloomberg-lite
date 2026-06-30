@@ -1,6 +1,38 @@
+import { StockContext } from '@/pages/fundamentalLab'
 import React from 'react'
+import { useEffect, useContext, useState } from 'react'
+
 
 const BalanceSheet = () => {
+    const {symbol} = useContext(StockContext)
+    const [loading, setLoading] = useState(false)
+    const [balanceSheetData, setBalanceSheetData] = useState(null)
+
+    useEffect(() =>{
+        const fetchBalanceSheet = async () => {
+            try{
+                setLoading(true)
+                const response = await fetch (`http://localhost:8000/stock/${symbol}/fundamental/balance-sheet`)
+                const data = await response.json();
+
+                setBalanceSheetData(data);
+                console.log(data)
+            }
+
+            catch(error){
+                alert("Error fetching stock data:", error)
+            }
+
+            finally{
+                setLoading(false)
+            }
+        }
+
+        fetchBalanceSheet();
+    }, [])
+
+    if (loading) return <div>Loading</div>
+
   return (
     <div>
         <div className="w-full min-h-70 bg-card rounded-xl border">
@@ -15,6 +47,7 @@ const BalanceSheet = () => {
                     </tr>
                 </thead>
                 <tbody>
+                    <td></td>
                     
 
 
