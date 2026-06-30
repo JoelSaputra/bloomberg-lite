@@ -1,6 +1,7 @@
 import React from 'react'
 import FundamentalOverview from '@/components/FundamentalOverview'
 import IncomeStatement from '@/components/IncomeStatement'
+import BalanceSheet from '@/components/BalanceSheet'
 import { useState, useEffect, createContext } from 'react'
 
 export const StockContext = createContext()
@@ -10,7 +11,7 @@ const FundamentalLab = () => {
   const [stockData, setStockData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [peHistory, setPeHistory] = useState(null)
-  const [activeTab, setActiveTab] = useState('overview')  // ← simplified to one state
+  const [activeTab, setActiveTab] = useState('overview')
 
   useEffect(() => {
     const fetchStockData = async () => {
@@ -58,11 +59,21 @@ const FundamentalLab = () => {
             </button>
             <hr className="w-36 mt-1 border" />
           </nav>
+          <nav>
+            <button onClick={() => setActiveTab('balance')} className="hover:text-ring hover:cursor-pointer ml-0.5">
+              Balance Sheet
+            </button>
+            <hr className="w-36 mt-1 border" />
+          </nav>
         </div>
 
         <div className="mt-5">
-          {activeTab === 'overview' ? <FundamentalOverview /> : <IncomeStatement />}
-        </div>
+         {activeTab === 'overview' && <FundamentalOverview />}
+         {activeTab === 'income' && <IncomeStatement />}
+         {activeTab === 'balance' && <BalanceSheet />}
+         {activeTab === 'cashflow' && <CashFlow />}
+         {activeTab === 'peers' && <PeerComparison />}
+         </div>
       </div>
     </StockContext.Provider>
   )

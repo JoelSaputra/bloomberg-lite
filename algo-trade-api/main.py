@@ -124,3 +124,14 @@ def get_income_statement(symbol: str = Path(min_length=1)):
         raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
+
+
+    
+@app.get("/stock/{symbol}/fundamental/balance-sheet")
+def get_balance_sheet(symbol:str=Path(min_length=1)):
+    stock = yf.Ticker(symbol)
+    balance_sheet = stock.balance_sheet
+
+    balance_sheet_history = []
+
+    
