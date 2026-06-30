@@ -8,7 +8,8 @@ import { useState, useEffect, createContext } from 'react'
 export const StockContext = createContext()
 
 const FundamentalLab = () => {
-  const [symbol, setSymbol] = useState('INTC')
+  const [symbol, setSymbol] = useState('AAPL')
+  const [stockSymbol, setStockSymbol] = useState('')
   const [stockData, setStockData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [peHistory, setPeHistory] = useState(null)
@@ -40,9 +41,14 @@ const FundamentalLab = () => {
       <div className="flex flex-col">
         <div className="flex flex-row items-center space-x-5">
           <input
-            className="bg-card text-gray-900 w-80 px-3 py-1.5 rounded-md border border-border focus:outline-none focus:ring-2 focus:ring-emerald-500 text-muted-foreground"
+            className="bg-card text-gray-900 w-80 px-3 py-1.5 rounded-md border border-border focus:outline-none focus:ring-2
+             focus:ring-emerald-500 text-muted-foreground"
             type="search"
-            placeholder='Search for symbol name...'
+            placeholder={'Search for symbol name...'}
+            value={stockSymbol}
+            onChange={(e) => setStockSymbol(e.target.value)}
+            onKeyDown={(e) => { if (e.key === 'Enter') setSymbol(stockSymbol) }}
+
           />
           <h4>{stockData?.name}</h4>
         </div>
