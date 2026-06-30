@@ -165,6 +165,43 @@ def get_balance_sheet(symbol: str = Path(min_length=1)):
         raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
- 
 
-     
+
+@app.get("/stock/{symbol}/fundamental/cash-flow")
+def get_cash_flow(symbol: str = Path(min_length=1)):
+    try:
+        stock = yf.Ticker(symbol)
+        cashflow = stock.cashflow
+
+        cash_flow_history = []
+
+        for date in cashflow.columns:
+            year = date.year
+
+            def safe_get(row_name):
+                if row_name in cashflow.index:
+                    value = cashflow.loc[row_name, date]
+                    if hasattr(value, 'iloc'):
+                        value = value.iloc[0]
+                    return value
+                return None
+
+            operating_cf = safe_get("Operating Cash Flow")
+            investing_cf = safe_get("Investing Cash Flow")
+            financing_cf = safe_get("Financing Cash Flow")
+            free_cf = safe_get("Free Cash Flow")
+
+            cash_flow_history.append({
+                "period": f"FY{year}",
+                "operatingCF": round(operating_cf / 1e9, 1) if operating_cf is not None and not pd.isna(operating_cf) else None,
+                "investingCF": round(investing_cf / 1e9, 1) if investing_cf is not None and not pd.isna(investing_cf) else None,
+                "financingCF": round(financing_cf / 1e9, 1) if financing_cf is not None and not pd.isna(financing_cf) else None,
+                "freeCF": round(free_cf / 1e9, 1) if free_cf is not None and not pd.isna(free_cf) else None,
+            })
+
+        return {"cash_flow": cash_flow_history}
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")

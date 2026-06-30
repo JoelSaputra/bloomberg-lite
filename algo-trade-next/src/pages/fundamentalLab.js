@@ -2,6 +2,7 @@ import React from 'react'
 import FundamentalOverview from '@/components/FundamentalOverview'
 import IncomeStatement from '@/components/IncomeStatement'
 import BalanceSheet from '@/components/BalanceSheet'
+import CashFlow from '@/components/CashFlow'
 import { useState, useEffect, createContext } from 'react'
 
 export const StockContext = createContext()
@@ -64,6 +65,12 @@ const FundamentalLab = () => {
               Balance Sheet
             </button>
             <hr className="w-30 mt-1 border" />
+          </nav>
+          <nav>
+            <button onClick={() => setActiveTab('cashflow')} className="hover:text-ring hover:cursor-pointer ml-1">
+              Cash Flow
+            </button>
+            <hr className="w-22 mt-1 border" />
           </nav>
         </div>
 
