@@ -37,7 +37,7 @@ const IncomeStatement = () => {
             }
 
             fetchIncomeStatement()
-        }, [])
+        }, [symbol])
 
     
     if (loading) return <div>Loading</div>

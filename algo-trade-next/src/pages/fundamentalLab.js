@@ -7,7 +7,7 @@ import { useState, useEffect, createContext } from 'react'
 export const StockContext = createContext()
 
 const FundamentalLab = () => {
-  const [symbol, setSymbol] = useState('AAPL')
+  const [symbol, setSymbol] = useState('INTC')
   const [stockData, setStockData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [peHistory, setPeHistory] = useState(null)
@@ -60,10 +60,10 @@ const FundamentalLab = () => {
             <hr className="w-36 mt-1 border" />
           </nav>
           <nav>
-            <button onClick={() => setActiveTab('balance')} className="hover:text-ring hover:cursor-pointer ml-0.5">
+            <button onClick={() => setActiveTab('balance')} className="hover:text-ring hover:cursor-pointer ml-1">
               Balance Sheet
             </button>
-            <hr className="w-36 mt-1 border" />
+            <hr className="w-30 mt-1 border" />
           </nav>
         </div>
 
