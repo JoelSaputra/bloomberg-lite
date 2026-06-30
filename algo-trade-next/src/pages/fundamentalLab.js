@@ -1,76 +1,71 @@
 import React from 'react'
 import FundamentalOverview from '@/components/FundamentalOverview'
-import {useState, useRef, useEffect ,useContext, createContext} from 'react'
-
+import IncomeStatement from '@/components/IncomeStatement'
+import { useState, useEffect, createContext } from 'react'
 
 export const StockContext = createContext()
 
-const fundamentalLab = () => {
+const FundamentalLab = () => {
+  const [symbol, setSymbol] = useState('INTC')
+  const [stockData, setStockData] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [peHistory, setPeHistory] = useState(null)
+  const [activeTab, setActiveTab] = useState('overview')  // ← simplified to one state
 
-   const [symbol, setSymbol] = useState('INTC')
-   const [stockData, setStockData] = useState(null)
-   const [loading, setLoading] = useState(true)
-   const [peHistory, setPeHistory] = useState(null) 
+  useEffect(() => {
+    const fetchStockData = async () => {
+      try {
+        setLoading(true)
+        const [keyStatisticsData, peData] = await Promise.all([
+          fetch(`http://localhost:8000/stock/${symbol}/fundamental/overview`).then(r => r.json()),
+          fetch(`http://localhost:8000/stock/${symbol}/fundamental/overview/pe-history`).then(r => r.json())
+        ])
+        setStockData(keyStatisticsData)
+        setPeHistory(peData)
+      } catch(error) {
+        alert("Error fetching stock data:", error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchStockData()
+  }, [symbol])
 
-   useEffect(() => {
-      const fetchStockData = async () => {
-         try{
-         setLoading(true)
-         const[keyStatisticsData, peData] = await Promise.all([
-            fetch(`http://localhost:8000/stock/${symbol}/fundamental/overview`).then(r => r.json()),
-            fetch(`http://localhost:8000/stock/${symbol}/fundamental/overview/pe-history`).then(r => r.json())
-         ])
-
-         setStockData(keyStatisticsData)
-         setPeHistory(peData)
-         console.log(peData)
-      
-         }
-
-         catch(error) {
-            alert("Error fetching stock data:", error)
-         }
-         finally{
-            setLoading(false)
-         }
-      } 
-
-      fetchStockData()
-   }, [symbol])
-
-   if (loading){
-      return (
-      <div>
-         Loading
-      </div>
-      )
-   }
-
+  if (loading) return <div>Loading</div>
 
   return (
-   <StockContext.Provider value={{symbol, stockData, setStockData, peHistory}}>
-    <div className="flex flex-col">
+    <StockContext.Provider value={{ symbol, stockData, setStockData, peHistory }}>
+      <div className="flex flex-col">
         <div className="flex flex-row items-center space-x-5">
-        <input className="bg-card text-gray-900 w-80 px-3 py-1.5 
-                            rounded-md border border-border focus:outline-none 
-                            focus:ring-2 focus:ring-emerald-500 text-muted-foreground" 
-                type="search" 
-                placeholder='Search for symbol name...'/>
-            <h4>{stockData.name}</h4>
-         </div>
-         
-         <nav className="mt-8">
-            <button className="hover:text-ring hover:cursor-pointer ml-0.5">Overview</button>
-            <hr className="w-20 mt-1 border"></hr>
-         </nav>
+          <input
+            className="bg-card text-gray-900 w-80 px-3 py-1.5 rounded-md border border-border focus:outline-none focus:ring-2 focus:ring-emerald-500 text-muted-foreground"
+            type="search"
+            placeholder='Search for symbol name...'
+          />
+          <h4>{stockData?.name}</h4>
+        </div>
 
-         <div className="mt-5">
-            <FundamentalOverview/>
-         </div>
+        <div className="flex flex-row mt-8 space-x-5">
+          <nav>
+            <button onClick={() => setActiveTab('overview')} className="hover:text-ring hover:cursor-pointer ml-0.5">
+              Overview
+            </button>
+            <hr className="w-20 mt-1 border" />
+          </nav>
+          <nav>
+            <button onClick={() => setActiveTab('income')} className="hover:text-ring hover:cursor-pointer ml-0.5">
+              Income Statement
+            </button>
+            <hr className="w-36 mt-1 border" />
+          </nav>
+        </div>
 
-    </div>
+        <div className="mt-5">
+          {activeTab === 'overview' ? <FundamentalOverview /> : <IncomeStatement />}
+        </div>
+      </div>
     </StockContext.Provider>
   )
 }
 
-export default fundamentalLab
+export default FundamentalLab

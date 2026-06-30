@@ -84,4 +84,43 @@ def get_pe_history(symbol:str=Path(min_length=1)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
     
-        
+
+
+@app.get("/stock/{symbol}/fundamental/income-statement")
+def get_income_statement(symbol: str = Path(min_length=1, max_length=5)):
+    try:
+        stock = yf.Ticker(symbol)
+        financials = stock.financials
+
+        income_statement = []
+
+        for date in financials.columns:
+            year = date.year
+
+            def safe_get(row_name):
+                if row_name in financials.index:
+                    value = financials.loc[row_name, date]
+                    if hasattr(value, 'iloc'):
+                        value = value.iloc[0]
+                    return value
+                return None
+
+            revenue = safe_get("Total Revenue")
+            gross_profit = safe_get("Gross Profit")
+            ebit = safe_get("EBIT")
+            net_income = safe_get("Net Income")
+
+            income_statement.append({
+                "period": f"FY{year}",
+                "revenue": round(revenue / 1e9, 1) if revenue is not None and not pd.isna(revenue) else None,
+                "grossProfit": round(gross_profit / 1e9, 1) if gross_profit is not None and not pd.isna(gross_profit) else None,
+                "ebit": round(ebit / 1e9, 1) if ebit is not None and not pd.isna(ebit) else None,
+                "netIncome": round(net_income / 1e9, 1) if net_income is not None and not pd.isna(net_income) else None,
+            })
+
+        return { "income_statement": income_statement }
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
