@@ -205,3 +205,35 @@ def get_cash_flow(symbol: str = Path(min_length=1)):
         raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
+
+
+
+@app.get("/stock/market-trend/top-gainers")
+def get_top_gainers():
+    try:
+
+        data = yf.screen("day_gainers")
+        quotes = data.get("quotes", [])
+        top_gainers = []
+
+        for q in quotes:
+            top_gainers.append({
+                "symbol": q.get("symbol"),
+                "name": q.get("shortName"),
+                "region": q.get("region"),
+                "price": q.get("regularMarketPrice"),
+                "change": round(q.get("regularMarketChange", 0), 2),
+                "changePct": round(q.get("regularMarketChangePercent", 0), 2),
+                "volume": q.get("regularMarketVolume"),
+                "marketCap": q.get("marketCap"),
+                "averageAnalystRating": q.get("averageAnalystRating") if q.get("averageAnalystRating") is not None else "N/A",
+                
+            })
+
+        return {"top_gainers": top_gainers}
+
+    except HTTPException:
+        raise
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
