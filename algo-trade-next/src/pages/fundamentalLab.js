@@ -47,7 +47,7 @@ const FundamentalLab = () => {
             placeholder={'Search for symbol name...'}
             value={stockSymbol}
             onChange={(e) => setStockSymbol(e.target.value)}
-            onKeyDown={(e) => { if (e.key === 'Enter') setSymbol(stockSymbol) }}
+            onKeyDown={(e) => { if (e.key === 'Enter') { setSymbol(stockSymbol); setStockSymbol('') } }}
 
           />
           <h4>{stockData?.name}</h4>
