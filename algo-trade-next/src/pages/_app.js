@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 export default function App({ Component, pageProps }) {
 
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
 
   return (
       <div className="flex h-screen bg-[#080a0d] overflow-hidden">

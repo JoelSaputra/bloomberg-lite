@@ -1,3 +1,4 @@
+import TrendScreenersGain from '@/components/TrendScreenersGain'
 import React, { useState } from 'react'
 
 const marketTrend = () => {
@@ -31,6 +32,9 @@ const marketTrend = () => {
               </button>
             ))}
           </div>
+
+          <TrendScreenersGain/>
+
       </div>
 
       <div className="w-[50%] bg-card border border-border rounded-lg h-120 overflow-y-auto pt-2 pb-5">
