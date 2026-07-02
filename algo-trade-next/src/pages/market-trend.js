@@ -1,4 +1,4 @@
-import TrendScreenersGain from '@/components/TrendScreenersGain'
+import StockScreener from '@/components/StockScreener'
 import React, { useState } from 'react'
 
 const marketTrend = () => {
@@ -12,6 +12,8 @@ const marketTrend = () => {
     { key: '52l', label: '52W Lows' },
     {key: 'Rating', label:'Rating'}
   ]
+
+
 
   return (
     <div className="flex flex-col">
@@ -33,7 +35,7 @@ const marketTrend = () => {
             ))}
           </div>
 
-          <TrendScreenersGain/>
+          <StockScreener activeTab={activeTab} tabs={tabs}/>
 
       </div>
 

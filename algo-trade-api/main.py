@@ -230,7 +230,36 @@ def get_top_gainers():
                 
             })
 
-        return {"top_gainers": top_gainers}
+        return {"data": top_gainers}
+
+    except HTTPException:
+        raise
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
+
+
+@app.get("/stock/market-trend/top-losers")
+def get_top_losers():
+    try:
+        data = yf.screen("day_losers")
+        quotes = data.get("quotes", [])
+        top_losers = []
+
+        for q in quotes:
+            top_losers.append({
+                "symbol": q.get("symbol"),
+                "name": q.get("shortName"),
+                "region": q.get("region"),
+                "price": q.get("regularMarketPrice"),
+                "change": round(q.get("regularMarketChange", 0), 2),
+                "changePct": round(q.get("regularMarketChangePercent", 0), 2),
+                "volume": q.get("regularMarketVolume"),
+                "marketCap": q.get("marketCap"),
+                "averageAnalystRating": q.get("averageAnalystRating") if q.get("averageAnalystRating") is not None else "N/A",
+            })
+
+        return {"data": top_losers}
 
     except HTTPException:
         raise

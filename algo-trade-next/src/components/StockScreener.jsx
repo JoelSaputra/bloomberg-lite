@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react'
 
 
 
-const TrendScreenersGain = () => {
+const StockScreener = ({tabs, activeTab}) => {
 
     const [topGainers, setTopGainers] = useState(null)
     const [loading, setLoading] = useState(true)
@@ -30,7 +30,7 @@ const TrendScreenersGain = () => {
 
     if (loading || !topGainers) return <div>Loading...</div>
 
-  const stock = topGainers.top_gainers;
+  const stock = topGainers.data;
 
   return (
     <>
@@ -75,4 +75,4 @@ const TrendScreenersGain = () => {
   )
 }
 
-export default TrendScreenersGain
+export default StockScreener
