@@ -354,3 +354,20 @@ def get_undervalued_growth_stocks():
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
+    
+
+SECTOR_ETFS = {
+    "Technology": "XLK",
+    "Communication": "XLC",
+    "Consumer Disc.": "XLY",
+    "Consumer Staples": "XLP",
+    "Financials": "XLF",
+    "Healthcare": "XLV",
+    "Industrials": "XLI",
+    "Energy": "XLE",
+    "Utilities": "XLU",
+    "Real Estate": "XLRE",
+    "Materials": "XLB",
+}
+    
+

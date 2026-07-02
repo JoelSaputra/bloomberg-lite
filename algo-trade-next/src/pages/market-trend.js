@@ -1,6 +1,7 @@
 import StockScreener from '@/components/StockScreener'
 import React, { useState } from 'react'
 import formatNumber from '@/utils/formatNumber'
+import MarketTrendSector from '@/components/MarketTrendSector'
 
 const marketTrend = () => {
   const [activeTab, setActiveTab] = useState('top-losers')
@@ -44,12 +45,27 @@ const marketTrend = () => {
       </div>
 
       <div className="w-[50%] bg-card border border-border rounded-lg h-120 overflow-y-auto pt-2 pb-5">
+        <div className="mt-3 ml-8">
+        <h1 className="text-[16px] font-extrabold">SECTOR PERFORMANCE 
+          <span className="text-muted-foreground text-[13px] ml-2">(by ETF)</span>
+        </h1>
+
+        <div>
+         
+        </div>
+
+        </div>
+        
 
       </div>
       </div>
 
       <div className="w-full mt-10 bg-card border border-border rounded-lg h-80 overflow-y-auto pt-2 pb-5">
+        <div className="mt-3 ml-8">
+          <h1 className="text-[16px] font-extrabold">MOST TRADED STOCKS</h1>
 
+
+        </div>
       </div>
 
     </div>

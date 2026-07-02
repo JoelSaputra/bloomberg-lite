@@ -34,7 +34,7 @@ const FundamentalLab = () => {
     fetchStockData()
   }, [symbol])
 
-  if (loading) return <div>Loading</div>
+  if (loading) return null
 
   return (
     <StockContext.Provider value={{ symbol, stockData, setStockData, peHistory }}>

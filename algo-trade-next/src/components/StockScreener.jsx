@@ -28,9 +28,9 @@ const StockScreener = ({tabs, activeTab}) => {
       }
       fetchTrendScreeners()
 
-    }, [])
+    }, [activeTab])
 
-    if (loading || !screen) return <div>Loading...</div>
+    if (loading || !screen) return null
 
   const stock = screen.data;
 
