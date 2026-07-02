@@ -57,20 +57,22 @@ const StockScreener = ({tabs, activeTab}) => {
       </div>
 
       <div className="flex flex-col w-40 shrink-0 space-y-1">
-        <span className={`font-semibold text-[13px] ${activeTab === 'top-losers' ? 'text-red-400' : 'text-emerald-400'}`}>
-          {activeTab === 'top-losers' ? '' : '+'}{stock.changePct.toFixed(2)}%
+        <span className={`font-semibold text-[13px] ${stock.changePct < 0 ? 'text-red-400' : 'text-emerald-400'}`}>
+          {stock.changePct >= 0 ? '+' : ''}{stock.changePct.toFixed(2)}%
         </span>
         <div className="w-[70%] h-1.5 bg-zinc-700 rounded-full">
           <div
-            className={`h-1.5 rounded-full ${activeTab === 'top-losers' ? 'bg-red-400' : 'bg-emerald-400'}`}
-            style={{ width: `${Math.min((Math.abs(stock.changePct) / 50) * 100, 100)}%` }}
+            className={`h-1.5 rounded-full ${stock.changePct < 0 ? 'bg-red-400' : 'bg-emerald-400'}`}
+            style={{ width: `${Math.min((Math.abs(stock.changePct) / 60) * 100, 100)}%` }}
           />
         </div>
       </div>
 
       <div className="w-32 flex flex-col shrink-0">
         <span className="text-[11px] text-indigo-300 whitespace-nowrap">Analyst Rating</span>
-        <span className="text-[13px] font-semibold">{stock.averageAnalystRating}</span>
+        <span className={`text-[13px] font-bold ${parseFloat(stock.averageAnalystRating) < 2.5 ? 'text-green-400' : 'text-red-600'}`}>
+          {stock.averageAnalystRating}
+        </span>
       </div>
 
     </div>

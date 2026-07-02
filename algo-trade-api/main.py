@@ -295,3 +295,32 @@ def get_most_active():
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
+    
+
+@app.get("/stock/market-trend/undervalued-large-caps")
+def get_52w_high():
+    try:
+        data = yf.screen("undervalued_large_caps")
+        quotes = data.get("quotes", [])
+        high_52w = []
+
+        for q in quotes:
+            high_52w.append({
+                "symbol": q.get("symbol"),
+                "name": q.get("shortName"),
+                "region": q.get("region"),
+                "price": q.get("regularMarketPrice"),
+                "change": round(q.get("regularMarketChange", 0), 2),
+                "changePct": round(q.get("regularMarketChangePercent", 0), 2),
+                "volume": q.get("regularMarketVolume"),
+                "marketCap": q.get("marketCap"),
+                "averageAnalystRating": q.get("averageAnalystRating") if q.get("averageAnalystRating") is not None else "N/A",
+            })
+
+        return {"data": high_52w}
+
+    except HTTPException:
+        raise
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
