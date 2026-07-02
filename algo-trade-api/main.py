@@ -369,5 +369,28 @@ SECTOR_ETFS = {
     "Real Estate": "XLRE",
     "Materials": "XLB",
 }
-    
+
+@app.get("/stock/market-trend/sector-performance")
+def get_sector_performance():
+    try:
+        result = []
+        for sector, ticker in SECTOR_ETFS.items():
+            stock = yf.Ticker(ticker)
+            info = stock.info
+            result.append({
+                "sector": sector,
+                "ticker": ticker,
+                "changePct": round(info.get("regularMarketChangePercent", 0), 2),
+                "ytdReturn": round((info.get("ytdReturn") or 0) * 100, 2),
+                "volume": info.get("regularMarketVolume"),
+                "marketCap": info.get("totalAssets"),
+            })
+        return {"sectors": result}
+
+    except HTTPException:
+        raise
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
+
 

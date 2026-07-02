@@ -26,6 +26,7 @@ const SideBar = ({collapsed, setCollapsed}) => {
           <Link href="/watchlist">Wat</Link>
           <Link href="/market-trend">M</Link>
           <Link href="/fundamentalLab">Fu</Link>
+          <Link href="/sectorIndex">Se</Link>
         </nav>
 
         {/* Collapse Toggle */}
