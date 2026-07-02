@@ -2,15 +2,15 @@ import StockScreener from '@/components/StockScreener'
 import React, { useState } from 'react'
 
 const marketTrend = () => {
-  const [activeTab, setActiveTab] = useState('gainers')
+  const [activeTab, setActiveTab] = useState('top-losers')
 
   const tabs = [
-    { key: 'gainers', label: 'Top Gainers' },
-    { key: 'losers', label: 'Top Losers' },
-    { key: 'active', label: 'Most Active' },
-    { key: '52h', label: '52W Highs' },
-    { key: '52l', label: '52W Lows' },
-    {key: 'Rating', label:'Rating'}
+    { key: 'top-gainers', label: 'Top Gainers' },
+    { key: 'top-losers', label: 'Top Losers' },
+    { key: 'most-active', label: 'Most Active' },
+    { key: '52w-high', label: '52W Highs' },
+    { key: '52w-low', label: '52W Lows' },
+    {key: 'rating', label:'Rating'}
   ]
 
 
@@ -35,7 +35,9 @@ const marketTrend = () => {
             ))}
           </div>
 
-          <StockScreener activeTab={activeTab} tabs={tabs}/>
+          {activeTab == 'top-gainers' && <StockScreener activeTab={activeTab} tabs={tabs}/>}
+          {activeTab == 'top-losers' && <StockScreener activeTab={activeTab} tabs={tabs}/>}
+          {activeTab == 'most-active' && <StockScreener activeTab={activeTab} tabs={tabs}/>}
 
       </div>
 

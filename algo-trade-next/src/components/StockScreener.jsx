@@ -5,16 +5,17 @@ import {useEffect, useState} from 'react'
 
 const StockScreener = ({tabs, activeTab}) => {
 
-    const [topGainers, setTopGainers] = useState(null)
+    const [screen, setScreen] = useState(null)
     const [loading, setLoading] = useState(true)
+    
 
     useEffect(() =>{
         const fetchTrendScreeners = async () => {
             try{
-                const response = await fetch (`http://localhost:8000/stock/market-trend/top-gainers`)
+                const response = await fetch (`http://localhost:8000/stock/market-trend/${activeTab}`)
                 const data = await response.json()
-                setTopGainers(data)
-                console.log("Top Gainers:", data)
+                setScreen(data)
+                console.log("screener-type:", data)
             }
 
             catch (error) {
@@ -28,9 +29,9 @@ const StockScreener = ({tabs, activeTab}) => {
 
     }, [])
 
-    if (loading || !topGainers) return <div>Loading...</div>
+    if (loading || !screen) return <div>Loading...</div>
 
-  const stock = topGainers.data;
+  const stock = screen.data;
 
   return (
     <>
@@ -55,11 +56,13 @@ const StockScreener = ({tabs, activeTab}) => {
       </div>
 
       <div className="flex flex-col w-40 shrink-0 space-y-1">
-        <span className="font-semibold text-[13px] text-emerald-400">+{stock.changePct.toFixed(2)}%</span>
-        <div className="w-[50%] h-1.5 bg-zinc-700 rounded-full">
+        <span className={`font-semibold text-[13px] ${activeTab === 'top-losers' ? 'text-red-400' : 'text-emerald-400'}`}>
+          {activeTab === 'top-losers' ? '' : '+'}{stock.changePct.toFixed(2)}%
+        </span>
+        <div className="w-[70%] h-1.5 bg-zinc-700 rounded-full">
           <div
-            className="h-1.5 bg-emerald-400 rounded-full"
-            style={{ width: `${Math.min((stock.changePct / 100) * 100, 100)}%` }}
+            className={`h-1.5 rounded-full ${activeTab === 'top-losers' ? 'bg-red-400' : 'bg-emerald-400'}`}
+            style={{ width: `${Math.min((Math.abs(stock.changePct) / 50) * 100, 100)}%` }}
           />
         </div>
       </div>
