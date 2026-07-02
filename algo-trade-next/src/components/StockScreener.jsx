@@ -70,7 +70,7 @@ const StockScreener = ({tabs, activeTab}) => {
 
       <div className="w-32 flex flex-col shrink-0">
         <span className="text-[11px] text-indigo-300 whitespace-nowrap">Analyst Rating</span>
-        <span className={`text-[13px] font-bold ${parseFloat(stock.averageAnalystRating) < 2.5 ? 'text-green-400' : 'text-red-600'}`}>
+        <span className={`text-[13px] font-bold ${parseFloat(stock.averageAnalystRating) < 2.5 ? 'text-green-400' : 'text-red-500'}`}>
           {stock.averageAnalystRating}
         </span>
       </div>
@@ -82,3 +82,5 @@ const StockScreener = ({tabs, activeTab}) => {
 }
 
 export default StockScreener
+
+

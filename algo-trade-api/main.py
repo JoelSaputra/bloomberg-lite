@@ -324,3 +324,33 @@ def get_52w_high():
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
+    
+
+
+@app.get("/stock/market-trend/undervalued-growth-stocks")
+def get_undervalued_growth_stocks():
+    try:
+        data = yf.screen("undervalued_growth_stocks")
+        quotes = data.get("quotes", [])
+        undervalued_growth_stocks = []
+
+        for q in quotes:
+            undervalued_growth_stocks.append({
+                "symbol": q.get("symbol"),
+                "name": q.get("shortName"),
+                "region": q.get("region"),
+                "price": q.get("regularMarketPrice"),
+                "change": round(q.get("regularMarketChange", 0), 2),
+                "changePct": round(q.get("regularMarketChangePercent", 0), 2),
+                "volume": q.get("regularMarketVolume"),
+                "marketCap": q.get("marketCap"),
+                "averageAnalystRating": q.get("averageAnalystRating") if q.get("averageAnalystRating") is not None else "N/A",
+            })
+
+        return {"data": undervalued_growth_stocks}
+
+    except HTTPException:
+        raise
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
