@@ -10,7 +10,7 @@ const marketTrend = () => {
     { key: 'top-losers', label: 'Top Losers' },
     { key: 'most-active', label: 'Most Active' },
     { key: 'undervalued-large-caps', label: 'Undervalued (Large Caps)' },
-    { key: '52w-low', label: '52W Lows' },
+    { key: 'undervalued-growth-stocks', label: 'Undervalued (Growth Stocks)' },
   ]
 
 
@@ -39,6 +39,7 @@ const marketTrend = () => {
           {activeTab == 'top-losers' && <StockScreener activeTab={activeTab} tabs={tabs}/>}
           {activeTab == 'most-active' && <StockScreener activeTab={activeTab} tabs={tabs}/>}
           {activeTab == 'undervalued-large-caps' && <StockScreener activeTab={activeTab} tabs={tabs}/>}
+          {activeTab == 'undervalued-growth-stocks' && <StockScreener activeTab={activeTab} tabs={tabs}/>}
 
       </div>
 
