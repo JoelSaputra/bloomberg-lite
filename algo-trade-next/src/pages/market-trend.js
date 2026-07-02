@@ -1,5 +1,6 @@
 import StockScreener from '@/components/StockScreener'
 import React, { useState } from 'react'
+import formatNumber from '@/utils/formatNumber'
 
 const marketTrend = () => {
   const [activeTab, setActiveTab] = useState('top-losers')

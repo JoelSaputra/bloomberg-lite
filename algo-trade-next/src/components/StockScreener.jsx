@@ -1,5 +1,6 @@
 import React from 'react'
 import {useEffect, useState} from 'react'
+import formatNumber from '@/utils/formatNumber.js'
 
 
 
@@ -51,7 +52,7 @@ const StockScreener = ({tabs, activeTab}) => {
       <div className="w-28 flex flex-col shrink-0">
         <span className="font-semibold text-[15px] text-yellow-200">${stock.price?.toFixed(2)}</span>
         <span className="text-[12px] text-muted-foreground">
-          Vol {(stock.volume / 1e3).toFixed(1)}K
+          Vol {(formatNumber(stock.volume))}
         </span>
       </div>
 
