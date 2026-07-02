@@ -266,3 +266,32 @@ def get_top_losers():
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
+    
+
+@app.get("/stock/market-trend/most-active")
+def get_most_active():
+    try:
+        data = yf.screen("most_actives")
+        quotes = data.get("quotes", [])
+        most_active = []
+
+        for q in quotes:
+            most_active.append({
+                "symbol": q.get("symbol"),
+                "name": q.get("shortName"),
+                "region": q.get("region"),
+                "price": q.get("regularMarketPrice"),
+                "change": round(q.get("regularMarketChange", 0), 2),
+                "changePct": round(q.get("regularMarketChangePercent", 0), 2),
+                "volume": q.get("regularMarketVolume"),
+                "marketCap": q.get("marketCap"),
+                "averageAnalystRating": q.get("averageAnalystRating") if q.get("averageAnalystRating") is not None else "N/A",
+            })
+
+        return {"data": most_active}
+
+    except HTTPException:
+        raise
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
