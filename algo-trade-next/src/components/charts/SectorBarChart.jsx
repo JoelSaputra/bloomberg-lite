@@ -16,9 +16,8 @@ const SectorBarChart = ({ data }) => {
         <BarChart
           data={sorted}
           layout="vertical"
-          margin={{ top: 0, right: 30, left: 10, bottom: 20 }}
+          margin={{ top: 3, right: 30, left: 10, bottom: 20 }}
         >
-          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#1f2937" />
           <XAxis
             type="number"
             tickFormatter={(v) => `${v > 0 ? '+' : ''}${v.toFixed(1)}%`}
@@ -29,7 +28,7 @@ const SectorBarChart = ({ data }) => {
           <YAxis
             type="category"
             dataKey="sector"
-            tick={{ fill: '#9ca3af', fontSize: 12 }}
+            tick={{ fill: '#9ca3af', fontSize: 12, fontWeight: 700 }}
             axisLine={true}
             tickLine={false}
             width={110}
@@ -40,6 +39,7 @@ const SectorBarChart = ({ data }) => {
             contentStyle={{ background: '#111827', border: '1px solid #1f2937', borderRadius: 6, fontSize: 12 }}
             labelStyle={{ color: '#e5e7eb' }}
             itemStyle={{ color: '#facc15' }}
+            cursor={{ fill: 'rgba(255,255,255,0.05)' }}
           />
           <Bar dataKey="changePct" radius={[0, 3, 3, 0]}>
             {sorted.map((entry, index) => (

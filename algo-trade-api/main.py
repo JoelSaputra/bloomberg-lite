@@ -384,6 +384,10 @@ def get_sector_performance():
                 "ytdReturn": round((info.get("ytdReturn") or 0), 2),
                 "volume": info.get("regularMarketVolume"),
                 "marketCap": info.get("totalAssets"),
+                "top_holdings": [
+                    {"symbol": sym, "name": row["Name"], "weight": round(row["Holding Percent"] * 100, 2)}
+                    for sym, row in stock.funds_data.top_holdings.iterrows()
+                ]
             })
         return {"sectors": result}
 
@@ -392,5 +396,3 @@ def get_sector_performance():
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
-
-

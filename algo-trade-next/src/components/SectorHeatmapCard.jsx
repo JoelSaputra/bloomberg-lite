@@ -1,10 +1,15 @@
 import React from 'react'
+import { useContext } from 'react'
+import { SectorContext } from '@/pages/sectorIndex'
 
 const SectorHeatmapCard = ({data}) => {
+
+  const {activeTab, setActiveTab} = useContext(SectorContext)
+
   if(!data) {
     return (
       <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
-        No sector data available.
+        Loading...
       </div>
     )
   }
@@ -17,7 +22,8 @@ const SectorHeatmapCard = ({data}) => {
         <div key={etf.sector} className={`h-26 border rounded-xl p-3 pl-4 text-left transition-all hover:scale-[1.02] cursor-pointer space-y-1
           ${etf.changePct >= 0
             ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-300'
-            : 'bg-red-500/20 border-red-500/40 text-red-400'}`}>
+            : 'bg-red-500/20 border-red-500/40 text-red-400'}`}
+            onClick={() => setActiveTab(etf.sector)} >
           <p className="font-bold text-[14px]">{etf.sector}</p>
           <p className="font-bold text-[24px]">{etf.changePct >= 0 ? '+' : ''}{etf.changePct.toFixed(2)}%</p>
           <p className="text-[12px] opacity-70">YTD {etf.ytdReturn >= 0 ? '+' : ''}{etf.ytdReturn.toFixed(1)}%</p>

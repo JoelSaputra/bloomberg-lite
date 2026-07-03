@@ -1,11 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, createContext } from 'react'
 import SectorBarChart from '@/components/charts/SectorBarChart'
 import SectorRadarChart from '@/components/charts/SectorRadarChart'
 import SectorHeatmapCard from '@/components/SectorHeatmapCard'
+import DetailedSector from '@/components/DetailedSector';
+
+export const SectorContext = createContext();
 
 const sectorIndex = () => {
   const [sectors, setSectors] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [activeTab, setActiveTab] = useState('Technology')
+
 
   useEffect(() => {
     const fetchSectors = async () => {
@@ -23,6 +28,8 @@ const sectorIndex = () => {
   }, [])
 
   return (
+
+    <SectorContext.Provider value={{ activeTab, setActiveTab, sectors, setSectors, loading}}>
     <div className="flex flex-col space-y-6">
       <div className="mt-2 mb-10">
         <SectorHeatmapCard data={sectors}/>
@@ -46,9 +53,15 @@ const sectorIndex = () => {
         </div>
       </div>
 
-      <div className="w-[100%] bg-card border border-border rounded-lg h-70 overflow-y-auto pt-2 pb-5">
+      <div className="w-[100%] bg-card border border-border rounded-lg h-70 overflow-y-auto pt-5 pb-5 pl-8 pr-20">
+            <DetailedSector/>
+        <div>
+
+        </div>
+
       </div>
     </div>
+    </SectorContext.Provider>
   )
 }
 
