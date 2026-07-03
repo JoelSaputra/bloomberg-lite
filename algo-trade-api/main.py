@@ -396,3 +396,6 @@ def get_sector_performance():
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
+
+
+
