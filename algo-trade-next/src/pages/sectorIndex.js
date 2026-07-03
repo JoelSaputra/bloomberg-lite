@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import SectorBarChart from '@/components/charts/SectorBarChart'
 import SectorRadarChart from '@/components/charts/SectorRadarChart'
+import SectorHeatmapCard from '@/components/SectorHeatmapCard'
 
 const sectorIndex = () => {
   const [sectors, setSectors] = useState(null)
@@ -23,8 +24,8 @@ const sectorIndex = () => {
 
   return (
     <div className="flex flex-col space-y-6">
-      <div className="mt-5 mb-37">
-        test
+      <div className="mt-2 mb-10">
+        <SectorHeatmapCard data={sectors}/>
       </div>
 
       <div className="flex flex-row space-x-6">

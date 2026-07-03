@@ -381,7 +381,7 @@ def get_sector_performance():
                 "sector": sector,
                 "ticker": ticker,
                 "changePct": round(info.get("regularMarketChangePercent", 0), 2),
-                "ytdReturn": round((info.get("ytdReturn") or 0) * 100, 2),
+                "ytdReturn": round((info.get("ytdReturn") or 0), 2),
                 "volume": info.get("regularMarketVolume"),
                 "marketCap": info.get("totalAssets"),
             })
