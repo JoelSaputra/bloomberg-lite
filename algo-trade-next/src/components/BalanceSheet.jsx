@@ -1,6 +1,7 @@
 import { StockContext } from '@/pages/fundamentalLab'
 import React from 'react'
 import { useEffect, useContext, useState } from 'react'
+import formatNumber from '@/utils/formatNumber'
 
 
 const BalanceSheet = () => {
@@ -51,10 +52,10 @@ const BalanceSheet = () => {
                     {balanceSheetData.balance_sheet.map((row) => (
                         <tr key={row.period} className="border-b border-border last:border-0">
                             <td className="px-4 py-4 text-[13px]">{row.period}</td>
-                            <td className="px-4 py-4 text-[13px] text-right font-semibold">{row.totalAssets != null ? `$${row.totalAssets}B` : 'N/A'}</td>
-                            <td className="px-4 py-4 text-[13px] text-right text-red-400 font-semibold">{row.totalLiabilities != null ? `$${row.totalLiabilities}B` : 'N/A'}</td>
-                            <td className="px-4 py-4 text-[13px] text-right text-green-400 font-semibold">{row.equity != null ? `$${row.equity}B` : 'N/A'}</td>
-                            <td className="px-4 py-4 text-[13px] text-right text-cyan-400 font-semibold">{row.cash != null ? `$${row.cash}B` : 'N/A'}</td>
+                            <td className="px-4 py-4 text-[13px] text-right font-semibold">{row.totalAssets != null ? `$${formatNumber(row.totalAssets)}` : 'N/A'}</td>
+                            <td className="px-4 py-4 text-[13px] text-right text-red-400 font-semibold">{row.totalLiabilities != null ? `$${formatNumber(row.totalLiabilities)}` : 'N/A'}</td>
+                            <td className="px-4 py-4 text-[13px] text-right text-green-400 font-semibold">{row.equity != null ? `$${formatNumber(row.equity)}` : 'N/A'}</td>
+                            <td className="px-4 py-4 text-[13px] text-right text-cyan-400 font-semibold">{row.cash != null ? `$${formatNumber(row.cash)}` : 'N/A'}</td>
                         </tr>
                     ))}
                 </tbody>

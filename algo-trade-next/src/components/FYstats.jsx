@@ -1,4 +1,5 @@
 import React from 'react'
+import formatNumber from '@/utils/formatNumber'
 
 const FYstats = ({ data }) => {
   if (!data) return null
@@ -21,10 +22,10 @@ const FYstats = ({ data }) => {
           {rows.map((row, index) => (
             <tr key={index} className="text-muted-foreground font-semibold border-b border-border hover:bg-secondary/50 transition-colors">
               <td className="pl-8 py-4 text-white tracking-tighter font-data">{row.period}</td>
-              <td className="text-center py-4 text-chart-5 tracking-tighter font-data">${row.revenue}B</td>
-              <td className="text-center py-4 text-primary tracking-tighter font-data">${row.grossProfit}B</td>
-              <td className="text-center py-4 text-blue-400 tracking-tighter font-data">${row.ebit}B</td>
-              <td className="text-center py-4 pr-8 text-yellow-400 tracking-tighter font-data">${row.netIncome}B</td>
+              <td className="text-center py-4 text-chart-5 tracking-tighter font-data">${formatNumber(row.revenue)}</td>
+              <td className="text-center py-4 text-primary tracking-tighter font-data">${formatNumber(row.grossProfit)}</td>
+              <td className="text-center py-4 text-blue-400 tracking-tighter font-data">${formatNumber(row.ebit)}</td>
+              <td className="text-center py-4 pr-8 text-yellow-400 tracking-tighter font-data">${formatNumber(row.netIncome)}</td>
             </tr>
           ))}
         </tbody>

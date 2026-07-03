@@ -112,10 +112,10 @@ def get_income_statement(symbol: str = Path(min_length=1)):
 
             income_statement.append({
                 "period": f"FY{year}",
-                "revenue": round(revenue / 1e9, 1) if revenue is not None and not pd.isna(revenue) else None,
-                "grossProfit": round(gross_profit / 1e9, 1) if gross_profit is not None and not pd.isna(gross_profit) else None,
-                "ebit": round(ebit / 1e9, 1) if ebit is not None and not pd.isna(ebit) else None,
-                "netIncome": round(net_income / 1e9, 1) if net_income is not None and not pd.isna(net_income) else None,
+                "revenue": int(revenue) if revenue is not None and not pd.isna(revenue) else None,
+                "grossProfit": int(gross_profit) if gross_profit is not None and not pd.isna(gross_profit) else None,
+                "ebit": int(ebit) if ebit is not None and not pd.isna(ebit) else None,
+                "netIncome": int(net_income) if net_income is not None and not pd.isna(net_income) else None,
             })
 
         return { "income_statement": income_statement }
@@ -153,10 +153,10 @@ def get_balance_sheet(symbol: str = Path(min_length=1)):
 
             balance_sheet_history.append({
                 "period": f"FY{year}",
-                "totalAssets": round(total_assets / 1e9, 1) if total_assets is not None and not pd.isna(total_assets) else None,
-                "totalLiabilities": round(total_liabilities / 1e9, 1) if total_liabilities is not None and not pd.isna(total_liabilities) else None,
-                "equity": round(equity / 1e9, 1) if equity is not None and not pd.isna(equity) else None,
-                "cash": round(cash / 1e9, 1) if cash is not None and not pd.isna(cash) else None,
+                "totalAssets": int(total_assets) if total_assets is not None and not pd.isna(total_assets) else None,
+                "totalLiabilities": int(total_liabilities) if total_liabilities is not None and not pd.isna(total_liabilities) else None,
+                "equity": int(equity) if equity is not None and not pd.isna(equity) else None,
+                "cash": int(cash) if cash is not None and not pd.isna(cash) else None,
             })
 
         return {"balance_sheet": balance_sheet_history}
@@ -193,10 +193,10 @@ def get_cash_flow(symbol: str = Path(min_length=1)):
 
             cash_flow_history.append({
                 "period": f"FY{year}",
-                "operatingCF": round(operating_cf / 1e9, 1) if operating_cf is not None and not pd.isna(operating_cf) else None,
-                "investingCF": round(investing_cf / 1e9, 1) if investing_cf is not None and not pd.isna(investing_cf) else None,
-                "financingCF": round(financing_cf / 1e9, 1) if financing_cf is not None and not pd.isna(financing_cf) else None,
-                "freeCF": round(free_cf / 1e9, 1) if free_cf is not None and not pd.isna(free_cf) else None,
+                "operatingCF": int(operating_cf) if operating_cf is not None and not pd.isna(operating_cf) else None,
+                "investingCF": int(investing_cf) if investing_cf is not None and not pd.isna(investing_cf) else None,
+                "financingCF": int(financing_cf) if financing_cf is not None and not pd.isna(financing_cf) else None,
+                "freeCF": int(free_cf) if free_cf is not None and not pd.isna(free_cf) else None,
             })
 
         return {"cash_flow": cash_flow_history}

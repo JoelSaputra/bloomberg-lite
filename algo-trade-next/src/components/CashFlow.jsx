@@ -1,6 +1,7 @@
 import { StockContext } from '@/pages/fundamentalLab'
 import React from 'react'
 import { useEffect, useContext, useState } from 'react'
+import formatNumber from '@/utils/formatNumber'
 
 
 const CashFlow = () => {
@@ -44,10 +45,10 @@ const CashFlow = () => {
                         {cashFlowData.cash_flow.map((row) => (
                             <tr key={row.period} className="border-b border-border last:border-0">
                                 <td className="px-4 py-4 text-[13px]">{row.period}</td>
-                                <td className="px-4 py-4 text-[13px] text-right text-green-400 font-semibold">{row.operatingCF != null ? `$${row.operatingCF}B` : 'N/A'}</td>
-                                <td className="px-4 py-4 text-[13px] text-right text-red-400 font-semibold">{row.investingCF != null ? `$${row.investingCF}B` : 'N/A'}</td>
-                                <td className="px-4 py-4 text-[13px] text-right text-red-400 font-semibold">{row.financingCF != null ? `$${row.financingCF}B` : 'N/A'}</td>
-                                <td className="px-4 py-4 text-[13px] text-right text-cyan-400 font-semibold">{row.freeCF != null ? `$${row.freeCF}B` : 'N/A'}</td>
+                                <td className="px-4 py-4 text-[13px] text-right text-green-400 font-semibold">{row.operatingCF != null ? `$${formatNumber(row.operatingCF)}` : 'N/A'}</td>
+                                <td className="px-4 py-4 text-[13px] text-right text-red-400 font-semibold">{row.investingCF != null ? `$${formatNumber(row.investingCF)}` : 'N/A'}</td>
+                                <td className="px-4 py-4 text-[13px] text-right text-red-400 font-semibold">{row.financingCF != null ? `$${formatNumber(row.financingCF)}` : 'N/A'}</td>
+                                <td className="px-4 py-4 text-[13px] text-right text-cyan-400 font-semibold">{row.freeCF != null ? `$${formatNumber(row.freeCF)}` : 'N/A'}</td>
                             </tr>
                         ))}
                     </tbody>
