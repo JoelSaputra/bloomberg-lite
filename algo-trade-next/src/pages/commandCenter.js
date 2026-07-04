@@ -36,7 +36,7 @@ const commandCenter = () => {
 
         <div className="flex flex-row space-x-4">
 
-        <div className="w-[18%] bg-card border border-border rounded-lg h-120 overflow-y-auto pt-2 pb-5 px-3">
+        <div className="w-[18%] bg-card border border-border rounded-lg h-120 overflow-y-auto pt-2 pb-5 px-3 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-neutral-700 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-y-4 [&::-webkit-scrollbar-thumb]:border-solid [&::-webkit-scrollbar-thumb]:border-transparent [&::-webkit-scrollbar-thumb]:bg-clip-padding [&::-webkit-scrollbar-track]:bg-transparent [scrollbar-width:thin]">
             <p className=" text-[15px] font-extrabold mb-5">MARKET PULSE</p>
             <MarketPulse marketPulseData={marketPulseData}/>
 
