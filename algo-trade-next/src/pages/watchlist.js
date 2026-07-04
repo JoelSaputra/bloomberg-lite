@@ -12,9 +12,7 @@ const Watchlist = () => {
     <div className="mt-5">
       <WatchlistMainDiv/>
     </div>
-
-
-
+    
     </div>
 
   )

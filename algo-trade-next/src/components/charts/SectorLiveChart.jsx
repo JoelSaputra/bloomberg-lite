@@ -3,6 +3,8 @@ import React, { useEffect } from 'react'
 const SectorLiveChart = ({ticker, heading}) => {
 
   useEffect(() => {
+    if (document.querySelector('script[src="https://widgets.tradingview-widget.com/w/en/tv-mini-chart.js"]')) return
+
     const script = document.createElement('script')
     script.src = "https://widgets.tradingview-widget.com/w/en/tv-mini-chart.js"
     script.type = 'module'
