@@ -356,6 +356,7 @@ def get_undervalued_growth_stocks():
         raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
     
 
+
 SECTOR_ETFS = {
     "Technology": "XLK",
     "Communication": "XLC",
@@ -369,6 +370,7 @@ SECTOR_ETFS = {
     "Real Estate": "XLRE",
     "Materials": "XLB",
 }
+
 
 @app.get("/stock/market-trend/sector-performance")
 def get_sector_performance():
@@ -436,5 +438,59 @@ def get_market_pulse():
 
     except HTTPException:
         raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
+
+
+GLOBAL_INDICES = {
+    "S&P 500": "^GSPC",
+    "Nasdaq": "^IXIC",
+    "Dow Jones": "^DJI",
+    "Russell 2000": "^RUT",
+    "FTSE 100": "^FTSE",
+    "DAX": "^GDAXI",
+    "JKSE": "^JKSE", 
+    "CAC 40": "^FCHI",
+    "Euro Stoxx 50": "^STOXX50E",
+    "Nikkei 225": "^N225",
+    "Hang Seng": "^HSI",
+    "Shanghai Composite": "000001.SS",
+    "KOSPI": "^KS11",
+    "ASX 200": "^AXJO",
+    "Nifty 50": "^NSEI",
+    "TSX Composite": "^GSPTSE",
+    "Bovespa": "^BVSP",
+}
+
+
+
+@app.get("/stock/commandCenter/global-heatmap")
+def get_global_indices():
+
+    def bonus(n:float):
+        if n == 0:
+            return 0.0
+        else:
+            return n
+        
+    try:
+        result = []
+        for label, ticker in GLOBAL_INDICES.items():
+            changePct = yf.Ticker(ticker).info.get("regularMarketChangePercent")
+
+
+            total = {
+                "label" : label,
+                "changePct": round(bonus(changePct), 2),
+            }
+
+            result.append(total)
+
+        
+        return result
+
+    except HTTPException:
+        raise
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
