@@ -1,3 +1,4 @@
+import CcDetailedChart from '@/components/charts/CcDetailedChart'
 import EconomicCalendar from '@/components/EconomicCalendar'
 import MarketPulse from '@/components/MarketPulse'
 import React from 'react'
@@ -42,8 +43,11 @@ const commandCenter = () => {
 
         </div>
 
-        <div className="w-[44%] bg-card border border-border rounded-lg h-120 overflow-y-auto pt-2 pb-5">
-            Detailed chart 
+        <div className="w-[44%] bg-card border border-border rounded-lg h-120 overflow-y-auto pt-2 pb-5 px-1">
+           <p className=" text-[15px] font-extrabold mb-2 ml-3">DETAILED CHART </p>
+            <div className="h-116">
+                <CcDetailedChart/>
+            </div>
         </div>
 
         <div className="w-[37%] bg-card border border-border rounded-lg h-120 overflow-y-auto pt-2 pb-5 pr-2 pl-2">
