@@ -10,9 +10,7 @@ const MarketSummary = () => {
     script.async = true
     document.head.appendChild(script)
 
-    return () => {
-      document.head.removeChild(script)
-    }
+
   }, [])
 
   return <tv-market-summary direction="horizontal" theme="dark" transparent/>

@@ -1,7 +1,6 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 
-const SectorLiveChart = () => {
-  const containerRef = useRef()
+const SectorLiveChart = ({ticker, heading}) => {
 
   useEffect(() => {
     const script = document.createElement('script')
@@ -10,14 +9,12 @@ const SectorLiveChart = () => {
 
     document.head.appendChild(script)
 
-    return () => {
-      document.head.removeChild(script)
-    }
   }, [])
 
   return (
-    <div className="w-[50%] h-50">
-     <tv-mini-chart symbol="XLK" theme="dark" transparent></tv-mini-chart>
+    <div className="w-[95%] h-40">
+      <p className="uppercase mt-5 font-data font-extrabold">{heading}</p>
+     <tv-mini-chart symbol={ticker} theme="dark" transparent></tv-mini-chart>
     </div>
   )
 }

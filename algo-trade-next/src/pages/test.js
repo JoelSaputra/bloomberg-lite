@@ -1,5 +1,5 @@
 import MarketSummary from '@/components/MarketSummary'
-import SectorLiveChart from '@/components/SectorLiveChart'
+import SectorLiveChart from '@/components/charts/SectorLiveChart'
 import React from 'react'
 
 
