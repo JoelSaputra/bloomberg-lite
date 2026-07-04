@@ -7,7 +7,7 @@ const test = () => {
   return (
 
     <div>
-       <SectorLiveChart/>
+       test
     </div>
   )
 }

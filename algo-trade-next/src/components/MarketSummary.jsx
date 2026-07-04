@@ -13,7 +13,11 @@ const MarketSummary = () => {
 
   }, [])
 
-  return <tv-market-summary direction="horizontal" theme="dark" transparent/>
+  return (
+  <div className="w-[98%]">
+  <tv-market-summary direction="horizontal" theme="dark" transparent/>
+  </div>
+  )
 }
 
 export default MarketSummary

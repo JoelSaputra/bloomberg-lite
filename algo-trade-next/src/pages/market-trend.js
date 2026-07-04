@@ -92,7 +92,7 @@ const marketTrend = () => {
       <div className="w-full mt-10 bg-card border border-border rounded-lg h-80 overflow-y-auto pt-2 pb-5">
         <div className="mt-3 ml-8">
           <h1 className="text-[16px] font-extrabold mb-5">STOCK-INFO 
-            <span className="text-[14px] text-muted-foreground font-data">(detailed)</span></h1>
+            <span className="text-[14px] text-muted-foreground font-data ml-2">(detailed)</span></h1>
 
                 <MarketSummary/>
         </div>
