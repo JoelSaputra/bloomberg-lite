@@ -3,6 +3,8 @@ import SectorBarChart from '@/components/charts/SectorBarChart'
 import SectorRadarChart from '@/components/charts/SectorRadarChart'
 import SectorHeatmapCard from '@/components/SectorHeatmapCard'
 import DetailedSector from '@/components/DetailedSector';
+import MarketHeatmapStock from '@/components/MarketHeatmapStock';
+import MarketHeatmapETF from '@/components/MarketHeatmapETF';
 
 export const SectorContext = createContext();
 
@@ -31,6 +33,16 @@ const sectorIndex = () => {
 
     <SectorContext.Provider value={{ activeTab, setActiveTab, sectors, setSectors, loading}}>
     <div className="flex flex-col space-y-6">
+      <div className="flex flex-row space-x-5">
+
+      <div className="w-[50%] bg-card border border-border rounded-lg h-100 overflow-y-auto pt-2 pb-2 pl-2 pr-2">
+          <MarketHeatmapStock/>
+      </div>
+
+      <div className="w-[50%] bg-card border border-border rounded-lg h-100 overflow-y-auto pt-2 pb-2 pl-2 pr-2">
+        <MarketHeatmapETF/>
+      </div>
+      </div>
       <div className="mt-2 mb-10">
         <SectorHeatmapCard data={sectors}/>
       </div>
@@ -55,10 +67,6 @@ const sectorIndex = () => {
 
       <div className="w-[100%] bg-card border border-border rounded-lg h-70 overflow-y-auto pt-5 pb-5 pl-8 pr-20">
             <DetailedSector/>
-        <div>
-
-        </div>
-
       </div>
     </div>
     </SectorContext.Provider>
