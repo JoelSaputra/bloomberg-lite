@@ -28,7 +28,9 @@ const SideBar = ({collapsed, setCollapsed}) => {
           <Link href="/fundamentalLab">Fu</Link>
           <Link href="/sectorIndex">Se</Link>
           <Link href="/technicalLab">Tech</Link>
+          <Link href="/commandCenter">CC</Link>
           <Link href="/test">Test</Link>
+          
         </nav>
 
         {/* Collapse Toggle */}

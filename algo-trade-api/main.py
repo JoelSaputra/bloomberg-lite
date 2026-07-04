@@ -399,3 +399,42 @@ def get_sector_performance():
 
 
 
+MARKET_PULSE_TICKERS = {
+    "VIX": "^VIX",
+    "10Yr Yield": "^TNX",
+    "USD Index": "DX-Y.NYB",
+    "BTC/USD": "BTC-USD",
+    "Gold": "GC=F",
+    "Oil (WTI)": "CL=F",
+    "SPX": "^GSPC", 
+}
+
+@app.get("/stock/commandCenter/market-pulse")
+def get_market_pulse():
+    try:
+        market_pulse_result = []
+
+        for label, ticker in MARKET_PULSE_TICKERS.items():
+            stock = yf.Ticker(ticker)
+            info = stock.info
+
+            result = {"label" : label, 
+                      "ticker": ticker,
+                      "price": info.get("regularMarketPrice"),
+                      "changePct": round(info.get("regularMarketChangePercent", 0), 2),
+                     }
+            
+            if label == "SPX":
+                fifty_two_wk_high = info.get("fiftyTwoWeekHigh")
+                price = info.get("regularMarketPrice")
+                if fifty_two_wk_high and price:
+                    result["pctOfHigh"] = round((price / fifty_two_wk_high) * 100, 2)
+
+            market_pulse_result.append(result)
+
+        return market_pulse_result
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
