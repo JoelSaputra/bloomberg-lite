@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, memo } from 'react';
 
 function TradingViewWidget() {
-  const container = useRef();
+  const widgetRef = useRef();
 
   useEffect(
     () => {
@@ -19,14 +19,21 @@ function TradingViewWidget() {
           "width": "100%",
           "height": "100%"
         }`;
-      container.current.appendChild(script);
+      const el = widgetRef.current;
+      el.appendChild(script);
+
+      return () => {
+        if (el) {
+          el.innerHTML = '';
+        }
+      };
     },
     []
   );
 
   return (
-    <div className="tradingview-widget-container" ref={container}>
-      <div className="tradingview-widget-container__widget"></div>
+    <div className="tradingview-widget-container h-full">
+      <div className="tradingview-widget-container__widget h-full" ref={widgetRef}></div>
       <div className="tradingview-widget-copyright"><a href="https://www.tradingview.com/economic-calendar/" rel="noopener nofollow" target="_blank"><span className="blue-text">Economic Calendar</span></a><span className="trademark"> by TradingView</span></div>
     </div>
   );

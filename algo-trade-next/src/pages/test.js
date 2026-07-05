@@ -9,7 +9,6 @@ const test = () => {
   return (
 
     <div className='w-[50%] h-50'>
-      <CcDetailedChart/>
     </div>
   )
 }

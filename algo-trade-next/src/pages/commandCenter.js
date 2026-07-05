@@ -1,5 +1,6 @@
 import CcDetailedChart from '@/components/charts/CcDetailedChart'
 import EconomicCalendar from '@/components/EconomicCalendar'
+import GlobalHeatmapCard from '@/components/GlobalHeatmapCard'
 import MarketPulse from '@/components/MarketPulse'
 import React from 'react'
 import {useEffect, useState} from 'react'
@@ -8,16 +9,21 @@ const commandCenter = () => {
 
     const [loading, setLoading] = useState(true)
     const [marketPulseData, setMarketPulseData] = useState(null)
+    const [globalIndices, setGlobalIndices] = useState(null)
 
     useEffect(() => {
         const fetchMarketPulse = async () => {
             try{
                 setLoading(true)
-                const response = await fetch('http://localhost:8000/stock/commandCenter/market-pulse')
-                const data = await response.json();
+                const [data1, data2] = await Promise.all([
+                    ( fetch('http://localhost:8000/stock/commandCenter/market-pulse')).then(r => r.json()),
+                    ( fetch('http://localhost:8000/stock/commandCenter/global-heatmap')).then(r => r.json())
+                ])
 
-                setMarketPulseData(data)
-                console.log(data)
+                setMarketPulseData(data1)
+                console.log(data1)
+                setGlobalIndices(data2)
+                console.log(data2)
             }
 
             catch(e){
@@ -31,6 +37,8 @@ const commandCenter = () => {
 
         fetchMarketPulse()
     }, [])
+
+  if (loading) return <div>loading</div>
 
   return (
     <div className="flex flex-col space-y-8">
@@ -60,8 +68,13 @@ const commandCenter = () => {
 
         </div>
 
-        <div className="w-[100%] bg-card border border-border rounded-lg h-120 overflow-y-auto pt-2 pb-5">
-            Global Heatmap
+        <div className="w-[100%] bg-card border border-border rounded-lg h-120 overflow-y-auto pt-8 pb-5 px-10">
+            <p className='font-extrabold text-[15px] ml-1 mb-6'>GLOBAL HEATMAP</p>
+            <div className="grid grid-cols-5 gap-3 w-full">
+                {globalIndices.map((globalIndex) => (
+                <GlobalHeatmapCard key={globalIndex.label} globalIndex={globalIndex}/>
+                ))}
+            </div>
         </div>
 
 
