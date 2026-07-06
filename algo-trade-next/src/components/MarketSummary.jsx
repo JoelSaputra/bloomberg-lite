@@ -8,14 +8,27 @@ const MarketSummary = () => {
     script.src = 'https://widgets.tradingview-widget.com/w/en/tv-market-summary.js'
     script.type = 'module'
     script.async = true
-    document.head.appendChild(script)
 
 
-  }, [])
+    const el = containerRef.current
+
+    el.appendChild(script)
+
+  
+    return () => {
+        if (el) {
+          el.innerHTML = '';
+        }
+      };
+    },
+    []
+  );
+
+
 
   return (
   <div className="w-[98%]">
-  <tv-market-summary direction="horizontal" theme="dark" transparent/>
+  <tv-market-summary direction="horizontal" theme="dark" transparent ref={containerRef}/>
   </div>
   )
 }

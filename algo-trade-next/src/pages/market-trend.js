@@ -99,6 +99,7 @@ const marketTrend = () => {
       </div>
 
     </div>
+    
   )
 }
 
