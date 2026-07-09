@@ -13,7 +13,7 @@ scheduler = BackgroundScheduler()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    scheduler.add_job(refresh_news, trigger=CronTrigger(hour="8,10,12,14,16,18,20"))
+    scheduler.add_job(refresh_news, trigger=CronTrigger(hour="8,10,12,14,16,18,20,22"))
     scheduler.start()
     refresh_news()
     yield
