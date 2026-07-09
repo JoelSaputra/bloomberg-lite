@@ -34,7 +34,7 @@ const news = () => {
     if (loading) return <div>loading...</div>
 
   return (
-    <div className="px-10 overflow-auto grid grid-cols-2 gap-x-8 gap-y-8">
+    <div className="px-4 overflow-auto grid grid-cols-2 gap-x-8 gap-y-8">
 
         {newsData.map((news) => 
             <div key={news.headline} className='w-[100%] h-85 bg-card border border-grey rounded-2xl pt-4 hover:border-indigo-300 pb-10'>
@@ -45,7 +45,7 @@ const news = () => {
 
             </div>
 
-            <div className=" px-16">
+            <div className=" px-8">
 
                 <ul className="list-disc space-y-4 text-justify">
                 {news.bullets.map( (point) => 
@@ -57,7 +57,7 @@ const news = () => {
                 
             </div>
 
-            <div className="px-10 mt-8 flex justify-center mb-5">
+            <div className="mt-6 flex justify-center mb-5">
             <a
                 href={news.url}
                 target="_blank"

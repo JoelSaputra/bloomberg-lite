@@ -6,6 +6,7 @@ import { StockContext } from '@/pages/fundamentalLab'
 
 
 
+
 const IncomeStatement = () => {
     const {symbol} = useContext(StockContext)
     const [loading, setLoading] = useState(false)
@@ -45,7 +46,7 @@ const IncomeStatement = () => {
 
   return (
     <div className="w-full min-h-140 bg-card rounded-md border pr-0 flex flex-col space-y-4">
-        <div>
+        <div className="ml-8">
         <IncomeBarGraph data={incomeStatement}/>
         </div>
         <FYstats data={incomeStatement}/>
