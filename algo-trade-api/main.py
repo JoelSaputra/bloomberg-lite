@@ -82,6 +82,36 @@ def get_keyStatistics(symbol:str=Path(min_length=1)):
 
 
 
+@app.get("/stock/{symbol}/profile")
+def get_company_profile(symbol:str=Path(min_length=1)):
+    try:
+        stock = yf.Ticker(symbol)
+        info = stock.info
+
+        if not info or "symbol" not in info:
+            raise HTTPException(status_code=404, detail="Stock not found")
+
+        return {
+            "symbol": symbol,
+            "name": info.get("longName"),
+            "exchange": info.get("exchange"),
+            "sector": info.get("sector"),
+            "industry": info.get("industry"),
+            "employees": info.get("fullTimeEmployees"),
+            "website": info.get("website"),
+            "city": info.get("city"),
+            "state": info.get("state"),
+            "country": info.get("country"),
+            "summary": info.get("longBusinessSummary"),
+        }
+
+    except HTTPException:
+        raise
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
+
+
 @app.get("/stock/{symbol}/fundamental/overview/pe-history")
 def get_pe_history(symbol:str=Path(min_length=1)):
     try:

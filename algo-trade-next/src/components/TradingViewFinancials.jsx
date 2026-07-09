@@ -1,8 +1,9 @@
-// TradingViewWidget.jsx
-import React, { useEffect, useRef, memo } from 'react';
+import { StockContext } from '@/pages/fundamentalLab';
+import React, { useEffect, useRef, memo, useContext } from 'react';
 
 function TradingViewWidget() {
   const container = useRef();
+  const symbol = useContext(StockContext)?.symbol ?? 'AAPL'
 
   useEffect(
     () => {
@@ -12,7 +13,7 @@ function TradingViewWidget() {
       script.async = true;
       script.innerHTML = `
         {
-          "symbol": "NASDAQ:AAPL",
+          "symbol": "${symbol}",
           "colorTheme": "dark",
           "displayMode": "regular",
           "isTransparent": true,
@@ -34,9 +35,9 @@ function TradingViewWidget() {
   );
 
   return (
-    <div className="tradingview-widget-container" ref={container}>
+    <div className="w-[100%]" ref={container}>
       <div className="tradingview-widget-container__widget"></div>
-      <div className="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/NASDAQ-AAPL/financials-overview/" rel="noopener nofollow" target="_blank"><span className="blue-text">AAPL fundamentals</span></a><span className="trademark"> by TradingView</span></div>
+      <div className="tradingview-widget-copyright"><a href={`https://www.tradingview.com/symbols/${symbol}/financials-overview/`} rel="noopener nofollow" target="_blank"><span className="blue-text">{symbol} fundamentals</span></a><span className="trademark"> by TradingView</span></div>
     </div>
   );
 }
