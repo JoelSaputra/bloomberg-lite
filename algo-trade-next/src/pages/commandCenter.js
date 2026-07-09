@@ -68,9 +68,9 @@ const commandCenter = () => {
 
         </div>
 
-        <div className="w-[100%] matte-metal-card border border-border rounded-lg h-120 overflow-y-auto pt-8 pb-5 px-10">
+        <div className="w-[100%] matte-metal-card border border-border rounded-lg h-120 overflow-y-auto pt-4 pb-5 px-4">
             <p className='font-extrabold text-[15px] ml-1 mb-6'>GLOBAL HEATMAP</p>
-            <div className="grid grid-cols-5 gap-3 w-full">
+            <div className="grid grid-cols-5 gap-y-1 gap-x-1.5 w-full">
                 {globalIndices.map((globalIndex) => (
                 <GlobalHeatmapCard key={globalIndex.label} globalIndex={globalIndex}/>
                 ))}

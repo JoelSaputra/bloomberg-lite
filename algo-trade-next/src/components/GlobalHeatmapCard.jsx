@@ -6,7 +6,7 @@ const GlobalHeatmapCard = ({globalIndex}) => {
 
 
   return (
-    <div className={`h-26 border rounded-xl p-3 pl-4 text-left transition-all hover:scale-[1.02] cursor-pointer space-y-1
+    <div className={`h-26 border rounded-md p-3 pl-4 text-left transition-all hover:scale-[1.02] cursor-pointer space-y-1
           ${globalIndex.changePct >= 0
             ? 'heatmap-cell-positive border-emerald-500/40 text-emerald-300'
             : 'heatmap-cell-negative border-red-500/40 text-red-400'}`}>

@@ -67,7 +67,7 @@ def summarize_news(filtered_articles):
 
         Return your response as a JSON array, one object per article, in this exact shape, and dont forget the url and image of the article:
         [
-        {{"headline": "...", "bullets": ["...", "...", "..."],"image": "...", "url": "...."}},
+        {{"headline": "...", "bullets": ["...", "...", "..."], "url": "...."}},
         ...
         ]
 

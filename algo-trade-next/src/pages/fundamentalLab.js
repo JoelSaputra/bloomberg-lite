@@ -4,6 +4,7 @@ import IncomeStatement from '@/components/IncomeStatement'
 import BalanceSheet from '@/components/BalanceSheet'
 import CashFlow from '@/components/CashFlow'
 import { useState, useEffect, createContext } from 'react'
+import FundamentalTradingview from '@/components/FundamentalTradingview'
 
 export const StockContext = createContext()
 
@@ -78,6 +79,12 @@ const FundamentalLab = () => {
             </button>
             <hr className="w-22 mt-1 border" />
           </nav>
+          <nav>
+            <button onClick={() => setActiveTab('tradingview')} className="hover:text-ring hover:cursor-pointer ml-0.5">
+              TradingViewDetailed
+            </button>
+            <hr className="w-40 mt-1 border" />
+          </nav>
         </div>
 
         <div className="mt-5">
@@ -85,7 +92,7 @@ const FundamentalLab = () => {
          {activeTab === 'income' && <IncomeStatement />}
          {activeTab === 'balance' && <BalanceSheet />}
          {activeTab === 'cashflow' && <CashFlow />}
-         {activeTab === 'peers' && <PeerComparison />}
+         {activeTab === 'tradingview' && <FundamentalTradingview/>}
          </div>
       </div>
     </StockContext.Provider>
