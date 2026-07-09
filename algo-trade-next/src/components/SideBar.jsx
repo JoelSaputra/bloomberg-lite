@@ -23,14 +23,16 @@ const SideBar = ({collapsed, setCollapsed}) => {
 
         {/* Navigation Items */}
         <nav className="py-3 px-2 flex flex-col text-sm gap-y-6">
-          <Link href="/watchlist">Wat</Link>
-          <Link href="/market-trend">M</Link>
-          <Link href="/fundamentalLab">Fu</Link>
-          <Link href="/sectorIndex">Se</Link>
-          <Link href="/technicalLab">Tech</Link>
           <Link href="/commandCenter">CC</Link>
+          <Link href="/sectorIndex">Se</Link>
+          <Link href="/market-trend">M</Link>
           <Link href="/news">News</Link>
+          <Link href="/watchlist">Wat</Link>
+          <Link href="/fundamentalLab">Fu</Link>
+          <Link href="/technicalLab">Tech</Link>
+          <Link href="/quantLab">Quant</Link>
           <Link href="/test">Test</Link>
+          
           
         </nav>
 

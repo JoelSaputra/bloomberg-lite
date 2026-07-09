@@ -9,10 +9,10 @@ const FundamentalTradingview = () => {
 
   return (
     <div className="flex flex-row space-x-5 w-full">
-      <div className="w-[31%] matte-metal-card border border-border rounded-lg h-120 overflow-y-auto">
+      <div className="w-[60%] matte-metal-card border border-border rounded-lg h-147 overflow-y-auto">
         <CompanyProfile symbol={symbol} />
       </div>
-      <div className="w-[31%] matte-metal-card border border-border rounded-lg h-120 overflow-y-auto">
+      <div className="w-[31%] matte-metal-card border border-border rounded-lg h-147 overflow-y-auto">
         <TradingViewFinancials/>
       </div>
     </div>
