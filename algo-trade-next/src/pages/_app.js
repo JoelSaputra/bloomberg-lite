@@ -10,7 +10,7 @@ export default function App({ Component, pageProps }) {
   const [collapsed, setCollapsed] = useState(true);
 
   return (
-      <div className="flex h-screen bg-[#080a0d] overflow-hidden">
+      <div className="flex h-screen matte-metal-bg overflow-hidden">
         <SideBar collapsed={collapsed} setCollapsed={setCollapsed}/>
         <div className={`flex-1 flex flex-col min-w-0 transition-all duration-300 
             ${collapsed ? 'ml-[60px]' : 'ml-[220px]'}`}>

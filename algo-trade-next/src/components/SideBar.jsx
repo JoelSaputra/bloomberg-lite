@@ -11,7 +11,7 @@ const SideBar = ({collapsed, setCollapsed}) => {
       <div 
         className={`
           fixed left-0 top-0 h-screen 
-          bg-[#0a0c10] border-r border-white/[0.07]
+          bg-[#0d0d0d] border-r border-white/[0.07]
           transition-all duration-300 z-50
           ${collapsed ? 'w-[60px]' : 'w-[220px]'}
         `}

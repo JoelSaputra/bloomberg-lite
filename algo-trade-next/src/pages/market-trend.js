@@ -44,7 +44,7 @@ const marketTrend = () => {
   return (
     <div className="flex flex-col">
       <div className="flex flex-row space-x-6">
-      <div className="w-[60%] bg-card border border-border rounded-lg h-120 overflow-y-auto">
+      <div className="w-[60%] matte-metal-card border border-border rounded-lg h-120 overflow-y-auto">
           <div className="flex flex-row space-x-1 border-b border-border px-3 pt-2">
             {tabs.map((tab) => (
               <button
@@ -69,7 +69,7 @@ const marketTrend = () => {
 
       </div>
 
-      <div className="w-[50%] bg-card border border-border rounded-lg h-120 overflow-y-auto pt-2 pb-5">
+      <div className="w-[50%] matte-metal-card border border-border rounded-lg h-120 overflow-y-auto pt-2 pb-5">
         <div className="mt-3 ml-8">
         <h1 className="text-[16px] font-extrabold">SECTOR PERFORMANCE 
           <span className="text-muted-foreground text-[13px] ml-2">(by ETF)</span>
@@ -89,7 +89,7 @@ const marketTrend = () => {
 
       </div>
 
-      <div className="w-full mt-10 bg-card border border-border rounded-lg h-80 overflow-y-auto pt-2 pb-5">
+      <div className="w-full mt-10 matte-metal-card border border-border rounded-lg h-80 overflow-y-auto pt-2 pb-5">
         <div className="mt-3 ml-8">
           <h1 className="text-[16px] font-extrabold mb-5">STOCK-INFO 
             <span className="text-[14px] text-muted-foreground font-data ml-2">(detailed)</span></h1>

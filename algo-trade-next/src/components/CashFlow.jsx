@@ -30,7 +30,7 @@ const CashFlow = () => {
 
     return (
         <div>
-            <div className="w-full bg-card rounded-xl border">
+            <div className="w-full matte-metal-card rounded-xl border">
                 <table className="w-full table-fixed font-data">
                     <thead>
                         <tr className="border-b border-border">

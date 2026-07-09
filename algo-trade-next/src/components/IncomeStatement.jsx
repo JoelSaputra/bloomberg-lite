@@ -45,7 +45,7 @@ const IncomeStatement = () => {
 
 
   return (
-    <div className="w-full min-h-140 bg-card rounded-md border pr-0 flex flex-col space-y-4">
+    <div className="w-full min-h-140 matte-metal-card rounded-md border pr-0 flex flex-col space-y-4">
         <div className="ml-8">
         <IncomeBarGraph data={incomeStatement}/>
         </div>

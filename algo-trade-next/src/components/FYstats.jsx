@@ -7,7 +7,7 @@ const FYstats = ({ data }) => {
   const rows = data.income_statement.filter(row => row.revenue !== null)
 
   return (
-    <div className="w-full bg-card border-t border-border pt-0">
+    <div className="w-full matte-metal-card border-t border-border pt-0">
       <table className="w-full table-fixed">
         <thead>
           <tr className="text-muted-foreground text-[13px] font-semibold border-b border-border">

@@ -8,7 +8,7 @@ const WatchlistMainDiv = () => {
   const [stocks, setStocks] = useState(mockStocks);
 
   return (
-    <div className="w-full bg-card border border-border rounded-md min-h-screen pt-2 pb-5">
+    <div className="w-full matte-metal-card border border-border rounded-md min-h-screen pt-2 pb-5">
       <table className="w-full">
     <thead>
     <tr className="text-muted-foreground text-[13px] font-semibold border-b border-border align-middle">

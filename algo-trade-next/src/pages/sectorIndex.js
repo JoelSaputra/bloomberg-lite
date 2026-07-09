@@ -35,11 +35,11 @@ const sectorIndex = () => {
     <div className="flex flex-col space-y-6">
       <div className="flex flex-row space-x-5">
 
-      <div className="w-[50%] bg-card border border-border rounded-lg h-100 overflow-y-auto pt-2 pb-2 pl-2 pr-2">
+      <div className="w-[50%] matte-metal-card border border-border rounded-lg h-100 overflow-y-auto pt-2 pb-2 pl-2 pr-2">
           <MarketHeatmapStock/>
       </div>
 
-      <div className="w-[50%] bg-card border border-border rounded-lg h-100 overflow-y-auto pt-2 pb-2 pl-2 pr-2">
+      <div className="w-[50%] matte-metal-card border border-border rounded-lg h-100 overflow-y-auto pt-2 pb-2 pl-2 pr-2">
         <MarketHeatmapETF/>
       </div>
       </div>
@@ -48,7 +48,7 @@ const sectorIndex = () => {
       </div>
 
       <div className="flex flex-row space-x-6">
-        <div className="w-[60%] bg-card border border-border rounded-lg h-90 overflow-hidden">
+        <div className="w-[60%] matte-metal-card border border-border rounded-lg h-90 overflow-hidden">
           {loading ? (
             <div className="flex items-center justify-center h-full text-muted-foreground text-sm">Loading...</div>
           ) : (
@@ -56,7 +56,7 @@ const sectorIndex = () => {
           )}
         </div>
 
-        <div className="w-[40%] bg-card border border-border rounded-lg h-90 overflow-hidden">
+        <div className="w-[40%] matte-metal-card border border-border rounded-lg h-90 overflow-hidden">
           {loading ? (
             <div className="flex items-center justify-center h-full text-muted-foreground text-sm">Loading...</div>
           ) : (
@@ -65,7 +65,7 @@ const sectorIndex = () => {
         </div>
       </div>
 
-      <div className="w-[100%] bg-card border border-border rounded-lg h-70 overflow-y-auto pt-5 pb-5 pl-8 pr-20">
+      <div className="w-[100%] matte-metal-card border border-border rounded-lg h-70 overflow-y-auto pt-5 pb-5 pl-8 pr-20">
             <DetailedSector/>
       </div>
     </div>

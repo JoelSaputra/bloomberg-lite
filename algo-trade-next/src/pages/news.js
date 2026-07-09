@@ -37,7 +37,7 @@ const news = () => {
     <div className="px-4 overflow-auto grid grid-cols-2 gap-x-8 gap-y-8">
 
         {newsData.map((news) => 
-            <div key={news.headline} className='w-[100%] h-85 bg-card border border-grey rounded-2xl pt-4 hover:border-indigo-300 pb-10'>
+            <div key={news.headline} className='w-[100%] h-85 matte-metal-card border border-grey rounded-2xl pt-4 hover:border-indigo-300 pb-10'>
             <div className="flex justify-center px-16 mb-8">
                 <h1 className="text-[19px] font-extrabold font-['Times_New_Roman'] text-center">
                     {news.headline}
