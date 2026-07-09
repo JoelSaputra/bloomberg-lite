@@ -72,7 +72,7 @@ const DetailedSector = () => {
             <div className="flex flex-row space-x-3 overflow-x-auto pb-2 mt-2">
                 {selected.top_holdings.map((holding) => (
                 <div key={holding.symbol}
-                className="w-78 shrink-0 h-20 bg-emerald-500/10 border-emerald-500/40
+                className="w-78 shrink-0 h-20 heatmap-cell-positive border-emerald-500/40
                  text-emerald-300 border rounded-xl p-3 pl-4 text-left transition-all hover:scale-[1.02]
                  cursor-pointer space-y-1">
                    <p className="text-white font-stretch-extra-condensed font-extrabold font-data"> {holding.symbol} </p>

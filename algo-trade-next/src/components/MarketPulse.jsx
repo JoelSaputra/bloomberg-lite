@@ -34,7 +34,7 @@ const MarketPulse = ({ marketPulseData }) => {
 
       <div className="border-b pb-2 flex flex-row justify-between">
         <div>
-          <p className="text-neutral-400 text-[14px] font-semibold">VIX</p>
+          <p className="text-muted-foreground text-[14px] font-semibold">VIX</p>
           <span className={`text-[11px] font-data ${vixColor(vix.price)}`}>{vixLabel(vix.price)}</span>
         </div>
         <span className={`font-data font-extrabold ${vixColor(vix.price)}`}>{vix.price}</span>
@@ -42,7 +42,7 @@ const MarketPulse = ({ marketPulseData }) => {
 
       <div className="border-b pb-2 flex flex-row justify-between">
         <div>
-          <p className="text-neutral-400 text-[14px] font-semibold">SPX 52W High</p>
+          <p className="text-muted-foreground text-[14px] font-semibold">SPX 52W High</p>
           <span className="text-[11px] text-neutral-400 font-data">
             <span className="font-bold mr-1">{spx.pctOfHigh.toFixed(2)}%</span> 
             of high</span>
@@ -51,7 +51,7 @@ const MarketPulse = ({ marketPulseData }) => {
       </div>
 
       <div className="border-b pb-2 flex flex-row justify-between">
-        <p className="text-neutral-400 text-[14px] font-semibold">10-Yr Yield</p>
+        <p className="text-muted-foreground text-[14px] font-semibold">10-Yr Yield</p>
         <div className="flex flex-col items-end">
           <span className={`font-data font-extrabold text-indigo-400`}>{formatNumber(tenYr.price.toFixed(2))}%</span>
           <span className={`font-data font-extrabold text-[13px] ${changeColor(tenYr.changePct)}`}>{tenYr.changePct.toFixed(2)}%</span>
@@ -59,7 +59,7 @@ const MarketPulse = ({ marketPulseData }) => {
       </div>
 
       <div className="border-b pb-2 flex flex-row justify-between">
-        <p className="text-neutral-400 text-[14px] font-semibold">USD Index (DXY)</p>
+        <p className="text-muted-foreground text-[14px] font-semibold">USD Index (DXY)</p>
         <div className="flex flex-col items-end">
           <span className="font-data font-extrabold">{formatNumber(usdIndex.price)}</span>
           <span className={`font-data font-extrabold text-[13px] ${changeColor(usdIndex.changePct)}`}>{usdIndex.changePct.toFixed(2)}%</span>
@@ -67,7 +67,7 @@ const MarketPulse = ({ marketPulseData }) => {
       </div>
 
       <div className="border-b pb-2 flex flex-row justify-between">
-        <p className="text-neutral-400 text-[14px] font-semibold">BTC/USD</p>
+        <p className="text-muted-foreground text-[14px] font-semibold">BTC/USD</p>
         <div className="flex flex-col items-end">
           <span className="font-data font-extrabold">${formatNumber(btc.price)}</span>
           <span className={`font-data font-extrabold text-[13px] ${changeColor(btc.changePct)}`}>{btc.changePct.toFixed(2)}%</span>
@@ -75,7 +75,7 @@ const MarketPulse = ({ marketPulseData }) => {
       </div>
 
       <div className="border-b pb-2 flex flex-row justify-between">
-        <p className="text-neutral-400 text-[14px] font-semibold">Gold <span>(XAU)</span></p>
+        <p className="text-muted-foreground text-[14px] font-semibold">Gold <span>(XAU)</span></p>
         <div className="flex flex-col items-end">
           <span className="font-data font-extrabold">${formatNumber(gold.price)}</span>
           <span className={`font-data font-extrabold text-[13px] ${changeColor(gold.changePct)}`}>{gold.changePct.toFixed(2)}%</span>
@@ -83,7 +83,7 @@ const MarketPulse = ({ marketPulseData }) => {
       </div>
 
       <div className="border-b pb-2 flex flex-row justify-between">
-        <p className="text-neutral-400 text-[14px] font-semibold">Oil (WTI)</p>
+        <p className="text-muted-foreground text-[14px] font-semibold">Oil (WTI)</p>
         <div className="flex flex-col items-end">
           <span className="font-data font-extrabold">${formatNumber(oil.price)}</span>
           <span className={`font-data font-extrabold text-[13px] ${changeColor(oil.changePct)}`}>{oil.changePct.toFixed(2)}%</span>
