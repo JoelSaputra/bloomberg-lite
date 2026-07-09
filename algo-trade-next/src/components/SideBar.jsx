@@ -29,6 +29,7 @@ const SideBar = ({collapsed, setCollapsed}) => {
           <Link href="/sectorIndex">Se</Link>
           <Link href="/technicalLab">Tech</Link>
           <Link href="/commandCenter">CC</Link>
+          <Link href="/news">News</Link>
           <Link href="/test">Test</Link>
           
         </nav>
