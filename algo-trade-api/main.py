@@ -1,18 +1,44 @@
 from fastapi import FastAPI, HTTPException, Path, status
 from fastapi.middleware.cors import CORSMiddleware
 import yfinance as yf
-import pandas as pd 
+import pandas as pd
+from contextlib import asynccontextmanager
+from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.triggers.cron import CronTrigger
+from recap import refresh_news, get_cached_news
 
 
+scheduler = BackgroundScheduler()
 
-app = FastAPI()
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    scheduler.add_job(refresh_news, trigger=CronTrigger(hour="8,10,12,14,16,18,20"))
+    scheduler.start()
+    yield
+
+
+app = FastAPI(lifespan=lifespan)
 
 app.add_middleware(
-    CORSMiddleware, 
+    CORSMiddleware,
     allow_origins=["http://localhost:3000"],
     allow_methods=["*"],
     allow_headers=["*"],
     )
+
+
+@app.get("/news-getter")
+def news_getter_endpoint():
+    try:
+        refresh_news()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to fetch summarized news: {e}")
+
+
+@app.get("/news")
+def get_news_endpoint():
+    return get_cached_news()
    
             
 
