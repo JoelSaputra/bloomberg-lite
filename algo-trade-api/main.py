@@ -7,6 +7,7 @@ from contextlib import asynccontextmanager
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
 from recap import refresh_news, get_cached_news
+from live_price import price_stream, get_symbols_info
 
 
 scheduler = BackgroundScheduler()
@@ -17,6 +18,7 @@ async def lifespan(app: FastAPI):
     scheduler.add_job(refresh_news, trigger=CronTrigger(hour="8,10,12,14,16,18,20,22"))
     scheduler.start()
     threading.Thread(target=refresh_news, daemon=True).start()
+    threading.Thread(target=price_stream, daemon=True).start()
     yield
 
 
@@ -38,10 +40,15 @@ def news_getter_endpoint():
         raise HTTPException(status_code=500, detail=f"Failed to fetch summarized news: {e}")
 
 
+
 @app.get("/news")
 def get_news_endpoint():
     return get_cached_news()
+
    
+@app.get("/live-price")
+def get_live_price_endpoint():
+    return get_symbols_info()
             
 
 @app.get("/")
@@ -552,3 +559,8 @@ def get_global_indices():
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
+    
+
+
+
+
