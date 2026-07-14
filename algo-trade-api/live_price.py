@@ -12,3 +12,7 @@ def price_stream():
     with yf.WebSocket() as ws:
         ws.subscribe(SYMBOLS)
         ws.listen(message_handler)
+
+
+def get_symbols_info():
+    return symbols_info
