@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException, Path, status
 from fastapi.middleware.cors import CORSMiddleware
 import yfinance as yf
 import pandas as pd
+import threading
 from contextlib import asynccontextmanager
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
@@ -15,7 +16,7 @@ scheduler = BackgroundScheduler()
 async def lifespan(app: FastAPI):
     scheduler.add_job(refresh_news, trigger=CronTrigger(hour="8,10,12,14,16,18,20,22"))
     scheduler.start()
-    refresh_news()
+    threading.Thread(target=refresh_news, daemon=True).start()
     yield
 
 
