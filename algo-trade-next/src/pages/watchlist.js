@@ -6,7 +6,7 @@ const Watchlist = () => {
   return (
     <div className="flex flex-col">
       <div className="flex flex-row">
-        <WatchlistSearchBar/>
+        
       </div>
 
     <div className="mt-5">
