@@ -1,6 +1,6 @@
 import yfinance as yf
 
-SYMBOLS = ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA", "NVDA", "META"]
+SYMBOLS = ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA", "NVDA", "META", "SPCX", "INTC", "TSM", "AAL", "UAL", "DELL", "NFLX", "DAL", "JBLU", "UAA", "NKE"]
 symbols_info = {}
 extra_info = {}
 
