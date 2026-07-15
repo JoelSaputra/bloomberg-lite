@@ -8,6 +8,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
 from recap import refresh_news, get_cached_news
 from live_price import price_stream, get_symbols_info, get_extra_info
+from cache import ttl_cache
 import os
 
 
@@ -61,6 +62,7 @@ def root():
 
 
 @app.get("/stock/{symbol}/fundamental/overview")
+@ttl_cache(60)
 def get_keyStatistics(symbol:str=Path(min_length=1)):
     try:
         stock = yf.Ticker(symbol)
@@ -95,6 +97,7 @@ def get_keyStatistics(symbol:str=Path(min_length=1)):
 
 
 @app.get("/stock/{symbol}/profile")
+@ttl_cache(300)
 def get_company_profile(symbol:str=Path(min_length=1)):
     try:
         stock = yf.Ticker(symbol)
@@ -125,6 +128,7 @@ def get_company_profile(symbol:str=Path(min_length=1)):
 
 
 @app.get("/stock/{symbol}/fundamental/overview/pe-history")
+@ttl_cache(3600)
 def get_pe_history(symbol:str=Path(min_length=1)):
     try:
         stock = yf.Ticker(symbol)
@@ -156,6 +160,7 @@ def get_pe_history(symbol:str=Path(min_length=1)):
 
 
 @app.get("/stock/{symbol}/fundamental/income-statement")
+@ttl_cache(3600)
 def get_income_statement(symbol: str = Path(min_length=1)):
     try:
         stock = yf.Ticker(symbol)
@@ -197,6 +202,7 @@ def get_income_statement(symbol: str = Path(min_length=1)):
 
     
 @app.get("/stock/{symbol}/fundamental/balance-sheet")
+@ttl_cache(3600)
 def get_balance_sheet(symbol: str = Path(min_length=1)):
     try:
         stock = yf.Ticker(symbol)
@@ -237,6 +243,7 @@ def get_balance_sheet(symbol: str = Path(min_length=1)):
 
 
 @app.get("/stock/{symbol}/fundamental/cash-flow")
+@ttl_cache(3600)
 def get_cash_flow(symbol: str = Path(min_length=1)):
     try:
         stock = yf.Ticker(symbol)
@@ -278,6 +285,7 @@ def get_cash_flow(symbol: str = Path(min_length=1)):
 
 
 @app.get("/stock/market-trend/top-gainers")
+@ttl_cache(120)
 def get_top_gainers():
     try:
 
@@ -309,6 +317,7 @@ def get_top_gainers():
 
 
 @app.get("/stock/market-trend/top-losers")
+@ttl_cache(120)
 def get_top_losers():
     try:
         data = yf.screen("day_losers")
@@ -338,6 +347,7 @@ def get_top_losers():
     
 
 @app.get("/stock/market-trend/most-active")
+@ttl_cache(120)
 def get_most_active():
     try:
         data = yf.screen("most_actives")
@@ -367,6 +377,7 @@ def get_most_active():
     
 
 @app.get("/stock/market-trend/undervalued-large-caps")
+@ttl_cache(120)
 def get_52w_high():
     try:
         data = yf.screen("undervalued_large_caps")
@@ -397,6 +408,7 @@ def get_52w_high():
 
 
 @app.get("/stock/market-trend/undervalued-growth-stocks")
+@ttl_cache(120)
 def get_undervalued_growth_stocks():
     try:
         data = yf.screen("undervalued_growth_stocks")
@@ -442,6 +454,7 @@ SECTOR_ETFS = {
 
 
 @app.get("/stock/market-trend/sector-performance")
+@ttl_cache(120)
 def get_sector_performance():
     try:
         result = []
@@ -481,6 +494,7 @@ MARKET_PULSE_TICKERS = {
 }
 
 @app.get("/stock/commandCenter/market-pulse")
+@ttl_cache(60)
 def get_market_pulse():
     try:
         market_pulse_result = []
@@ -534,6 +548,7 @@ GLOBAL_INDICES = {
 
 
 @app.get("/stock/commandCenter/global-heatmap")
+@ttl_cache(60)
 def get_global_indices():
 
     def bonus(n:float):

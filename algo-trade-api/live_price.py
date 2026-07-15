@@ -1,4 +1,5 @@
 import yfinance as yf
+from cache import ttl_cache
 
 SYMBOLS = ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA", "NVDA", "META", "SPCX", "INTC", "TSM", "AAL", "UAL", "DELL", "NFLX", "DAL", "JBLU", "UAA", "NKE"]
 symbols_info = {}
@@ -18,6 +19,7 @@ def price_stream():
 def get_symbols_info():
     return symbols_info
 
+@ttl_cache(60)
 def get_extra_info():
     global extra_info
     for symbol in SYMBOLS:
