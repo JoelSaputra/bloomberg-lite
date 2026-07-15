@@ -1,5 +1,6 @@
 import yfinance as yf
 from cache import ttl_cache
+import finnhub_client as fh
 
 SYMBOLS = ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA", "NVDA", "META", "SPCX", "INTC", "TSM", "AAL", "UAL", "DELL", "NFLX", "DAL", "JBLU", "UAA", "NKE"]
 symbols_info = {}
@@ -23,22 +24,22 @@ def get_symbols_info():
 def get_extra_info():
     global extra_info
     for symbol in SYMBOLS:
-        stock_info = {}
-        stock = yf.Ticker(symbol)
-        stock_name = stock.info.get("longName")
-        stock_volume = stock.info.get("volume")
-        stock_marketCap = stock.info.get("marketCap")
-        stock_PE = stock.info.get("trailingPE")
-        stock_dividend = stock.info.get("dividendYield")
-        stock_recommendKey = stock.info.get("recommendationKey")
-        
-        stock_info["id"] = symbol
-        stock_info["name"] = stock_name
-        stock_info["volume"] = stock_volume
-        stock_info["market_cap"] = stock_marketCap
-        stock_info["pe"] = stock_PE 
-        stock_info["dividend"] = stock_dividend
-        stock_info["recommendKey"] = stock_recommendKey
+        profile = fh.get_profile(symbol)
+        metric = fh.get_metric(symbol)
+        recommend_key = fh.get_recommendation_label(symbol)
+
+        avg_volume = metric.get("10DayAverageTradingVolume")
+        market_cap = profile.get("marketCapitalization")
+
+        stock_info = {
+            "id": symbol,
+            "name": profile.get("name"),
+            "volume": avg_volume * 1_000_000 if avg_volume is not None else None,
+            "market_cap": market_cap * 1_000_000 if market_cap is not None else None,
+            "pe": metric.get("peBasicExclExtraTTM"),
+            "dividend": metric.get("currentDividendYieldTTM"),
+            "recommendKey": recommend_key,
+        }
 
         extra_info[symbol] = stock_info
 

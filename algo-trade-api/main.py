@@ -9,6 +9,7 @@ from apscheduler.triggers.cron import CronTrigger
 from recap import refresh_news, get_cached_news
 from live_price import price_stream, get_symbols_info, get_extra_info
 from cache import ttl_cache
+import finnhub_client as fh
 import os
 
 
@@ -53,7 +54,10 @@ def get_live_price_endpoint():
 
 @app.get("/extra-info")
 def get_extra_info_endpoint():
-   return get_extra_info()
+    try:
+        return get_extra_info()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
             
 
 @app.get("/")
@@ -65,26 +69,29 @@ def root():
 @ttl_cache(60)
 def get_keyStatistics(symbol:str=Path(min_length=1)):
     try:
-        stock = yf.Ticker(symbol)
-        info = stock.info
+        profile = fh.get_profile(symbol)
 
-        if not info or "symbol" not in info:
+        if not profile or "name" not in profile:
             raise HTTPException(status_code=404, detail="Stock not found")
+
+        metric = fh.get_metric(symbol)
+        market_cap = profile.get("marketCapitalization")
+        roe = metric.get("roeTTM")
 
         return {
             "symbol": symbol,
-            "name": info.get("longName"),
-            "sector": info.get("sector"),
-            "marketCap": info.get("marketCap"),
-            "pe": info.get("trailingPE"),
-            "pb": info.get("priceToBook"),
-            "roe": info.get("returnOnEquity"),
-            "divYield": info.get("dividendYield"),
-            "eps": info.get("trailingEps"),
-            "revenue": info.get("totalRevenue"),
-            "netIncome": info.get("netIncomeToCommon"),
-            "debtToEquity": info.get("debtToEquity"),
-            "currentRatio": info.get("currentRatio"),
+            "name": profile.get("name"),
+            "sector": profile.get("finnhubIndustry"),
+            "marketCap": market_cap * 1_000_000 if market_cap is not None else None,
+            "pe": metric.get("peBasicExclExtraTTM"),
+            "pb": metric.get("pbAnnual"),
+            "roe": roe / 100 if roe is not None else None,
+            "divYield": metric.get("currentDividendYieldTTM"),
+            "eps": metric.get("epsInclExtraItemsTTM"),
+            "revenue": None,
+            "netIncome": None,
+            "debtToEquity": metric.get("totalDebt/totalEquityAnnual"),
+            "currentRatio": metric.get("currentRatioAnnual"),
 
         }
 
@@ -92,7 +99,7 @@ def get_keyStatistics(symbol:str=Path(min_length=1)):
         raise
 
     except Exception as e:
-         raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}") 
+         raise HTTPException(status_code=500, detail=f"Error fetching data: {str(e)}")
 
 
 
@@ -100,24 +107,23 @@ def get_keyStatistics(symbol:str=Path(min_length=1)):
 @ttl_cache(300)
 def get_company_profile(symbol:str=Path(min_length=1)):
     try:
-        stock = yf.Ticker(symbol)
-        info = stock.info
+        profile = fh.get_profile(symbol)
 
-        if not info or "symbol" not in info:
+        if not profile or "name" not in profile:
             raise HTTPException(status_code=404, detail="Stock not found")
 
         return {
             "symbol": symbol,
-            "name": info.get("longName"),
-            "exchange": info.get("exchange"),
-            "sector": info.get("sector"),
-            "industry": info.get("industry"),
-            "employees": info.get("fullTimeEmployees"),
-            "website": info.get("website"),
-            "city": info.get("city"),
-            "state": info.get("state"),
-            "country": info.get("country"),
-            "summary": info.get("longBusinessSummary"),
+            "name": profile.get("name"),
+            "exchange": profile.get("exchange"),
+            "sector": profile.get("finnhubIndustry"),
+            "industry": None,
+            "employees": None,
+            "website": profile.get("weburl"),
+            "city": None,
+            "state": None,
+            "country": profile.get("country"),
+            "summary": None,
         }
 
     except HTTPException:
