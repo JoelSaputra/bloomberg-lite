@@ -53,18 +53,14 @@ const SideBar = ({collapsed, setCollapsed}) => {
               </Link>
             )
           })}
-
-          <Link href="/test">Test</Link>
         </nav>
 
-        {/* Collapse Toggle */}
         <div className="absolute bottom-4 left-0 right-0 px-2">
           <button
             onClick={() => setCollapsed(!collapsed)}
             className="w-full flex items-center justify-center p-2 rounded-lg text-neutral-600 hover:text-neutral-300 hover:bg-white/[0.04] transition-colors"
           >
             <ChevronRight/>
-            {/* Chevron icon goes here */}
           </button>
         </div>
       </div>
