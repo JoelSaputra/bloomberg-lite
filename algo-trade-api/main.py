@@ -8,9 +8,11 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
 from recap import refresh_news, get_cached_news
 from live_price import price_stream, get_symbols_info, get_extra_info
+import os
 
 
 scheduler = BackgroundScheduler()
+FRONTEND_URL = os.environ.get("FRONTEND_URL", "http://localhost:3000")
 
 
 @asynccontextmanager
@@ -26,7 +28,7 @@ app = FastAPI(lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=[FRONTEND_URL],
     allow_methods=["*"],
     allow_headers=["*"],
     )
