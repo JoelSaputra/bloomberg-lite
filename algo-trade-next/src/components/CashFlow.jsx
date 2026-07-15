@@ -2,6 +2,7 @@ import { StockContext } from '@/pages/fundamentalLab'
 import React from 'react'
 import { useEffect, useContext, useState } from 'react'
 import formatNumber from '@/utils/formatNumber'
+import API_URL from '@/utils/apiUrl'
 
 
 const CashFlow = () => {
@@ -13,7 +14,7 @@ const CashFlow = () => {
         const fetchCashFlow = async () => {
             try {
                 setLoading(true)
-                const response = await fetch(`http://localhost:8000/stock/${symbol}/fundamental/cash-flow`)
+                const response = await fetch(`${API_URL}/stock/${symbol}/fundamental/cash-flow`)
                 const data = await response.json()
                 setCashFlowData(data)
             } catch (error) {

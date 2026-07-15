@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
+import API_URL from '@/utils/apiUrl'
 
 const news = () => {
     const [newsData, setNewsData] = useState(null)
@@ -9,7 +10,7 @@ const news = () => {
         const fetchNews = async () => {
             try{
                 setLoading(true)
-                const response = await fetch('http://localhost:8000/news')
+                const response = await fetch(`${API_URL}/news`)
                 const data = await response.json()
 
                 setNewsData(data)

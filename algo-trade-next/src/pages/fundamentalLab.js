@@ -5,6 +5,7 @@ import BalanceSheet from '@/components/BalanceSheet'
 import CashFlow from '@/components/CashFlow'
 import { useState, useEffect, createContext } from 'react'
 import FundamentalTradingview from '@/components/FundamentalTradingview'
+import API_URL from '@/utils/apiUrl'
 
 export const StockContext = createContext()
 
@@ -21,8 +22,8 @@ const FundamentalLab = () => {
       try {
         setLoading(true)
         const [keyStatisticsData, peData] = await Promise.all([
-          fetch(`http://localhost:8000/stock/${symbol}/fundamental/overview`).then(r => r.json()),
-          fetch(`http://localhost:8000/stock/${symbol}/fundamental/overview/pe-history`).then(r => r.json())
+          fetch(`${API_URL}/stock/${symbol}/fundamental/overview`).then(r => r.json()),
+          fetch(`${API_URL}/stock/${symbol}/fundamental/overview/pe-history`).then(r => r.json())
         ])
         setStockData(keyStatisticsData)
         setPeHistory(peData)

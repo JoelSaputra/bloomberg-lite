@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import API_URL from '@/utils/apiUrl'
 
 const CompanyProfile = ({ symbol = 'AAPL' }) => {
   const [profile, setProfile] = useState(null)
@@ -9,7 +10,7 @@ const CompanyProfile = ({ symbol = 'AAPL' }) => {
     const fetchProfile = async () => {
       try {
         setLoading(true)
-        const response = await fetch(`http://localhost:8000/stock/${symbol}/profile`)
+        const response = await fetch(`${API_URL}/stock/${symbol}/profile`)
         const data = await response.json()
         setProfile(data)
       } catch (e) {

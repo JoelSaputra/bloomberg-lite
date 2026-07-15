@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import WatchlistStocks from './WatchlistStocks';
+import API_URL from '@/utils/apiUrl'
 
 const WatchlistMainDiv = () => {
   const [stocks, setStocks] = useState([])
@@ -10,7 +11,7 @@ const WatchlistMainDiv = () => {
   useEffect(() => {
     const fetchLivePrices = async () => {
       try {
-        const response = await fetch('http://localhost:8000/live-price')
+        const response = await fetch(`${API_URL}/live-price`)
         const liveData = await response.json()
 
         const liveStocks = Object.values(liveData).map((stock) => {
@@ -45,7 +46,7 @@ const WatchlistMainDiv = () => {
   useEffect(() => {
     const fetchExtraInfo = async () => {
       try {
-        const response = await fetch('http://localhost:8000/extra-info')
+        const response = await fetch(`${API_URL}/extra-info`)
         const data = await response.json()
 
         setExtraData(data)

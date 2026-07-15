@@ -5,6 +5,7 @@ import SectorHeatmapCard from '@/components/SectorHeatmapCard'
 import DetailedSector from '@/components/DetailedSector';
 import MarketHeatmapStock from '@/components/MarketHeatmapStock';
 import MarketHeatmapETF from '@/components/MarketHeatmapETF';
+import API_URL from '@/utils/apiUrl'
 
 export const SectorContext = createContext();
 
@@ -17,7 +18,7 @@ const sectorIndex = () => {
   useEffect(() => {
     const fetchSectors = async () => {
       try {
-        const res = await fetch('http://localhost:8000/stock/market-trend/sector-performance')
+        const res = await fetch(`${API_URL}/stock/market-trend/sector-performance`)
         const data = await res.json()
         setSectors(data.sectors)
       } catch (e) {

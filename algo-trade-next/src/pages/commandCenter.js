@@ -2,6 +2,7 @@ import CcDetailedChart from '@/components/charts/CcDetailedChart'
 import EconomicCalendar from '@/components/EconomicCalendar'
 import GlobalHeatmapCard from '@/components/GlobalHeatmapCard'
 import MarketPulse from '@/components/MarketPulse'
+import API_URL from '@/utils/apiUrl'
 import React from 'react'
 import {useEffect, useState} from 'react'
 
@@ -16,8 +17,8 @@ const commandCenter = () => {
             try{
                 setLoading(true)
                 const [data1, data2] = await Promise.all([
-                    ( fetch('http://localhost:8000/stock/commandCenter/market-pulse')).then(r => r.json()),
-                    ( fetch('http://localhost:8000/stock/commandCenter/global-heatmap')).then(r => r.json())
+                    ( fetch(`${API_URL}/stock/commandCenter/market-pulse`)).then(r => r.json()),
+                    ( fetch(`${API_URL}/stock/commandCenter/global-heatmap`)).then(r => r.json())
                 ])
 
                 setMarketPulseData(data1)

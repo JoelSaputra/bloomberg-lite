@@ -3,6 +3,7 @@ import FYstats from './FYstats'
 import IncomeBarGraph from './charts/IncomeBarGraph'
 import {useEffect, useState, useContext} from 'react'
 import { StockContext } from '@/pages/fundamentalLab'
+import API_URL from '@/utils/apiUrl'
 
 
 
@@ -19,7 +20,7 @@ const IncomeStatement = () => {
 
             try{
                 setLoading(true)
-                const response = await fetch(`http://localhost:8000/stock/${symbol}/fundamental/income-statement`)
+                const response = await fetch(`${API_URL}/stock/${symbol}/fundamental/income-statement`)
                 const data = await response.json()
             
                 setIncomeStatement(data)

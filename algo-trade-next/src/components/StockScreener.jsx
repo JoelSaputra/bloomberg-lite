@@ -1,6 +1,7 @@
 import React from 'react'
 import {useEffect, useState} from 'react'
 import formatNumber from '@/utils/formatNumber.js'
+import API_URL from '@/utils/apiUrl'
 
 
 
@@ -13,7 +14,7 @@ const StockScreener = ({tabs, activeTab}) => {
     useEffect(() =>{
         const fetchTrendScreeners = async () => {
             try{
-                const response = await fetch (`http://localhost:8000/stock/market-trend/${activeTab}`)
+                const response = await fetch (`${API_URL}/stock/market-trend/${activeTab}`)
                 const data = await response.json()
                 setScreen(data)
                 console.log("screener-type:", data)

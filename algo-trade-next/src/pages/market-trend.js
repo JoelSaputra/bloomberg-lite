@@ -4,6 +4,7 @@ import formatNumber from '@/utils/formatNumber'
 import MarketTrendSector from '@/components/MarketTrendSector'
 import MarketSummary from '@/components/MarketSummary'
 import SectorLiveChart from '@/components/charts/SectorLiveChart'
+import API_URL from '@/utils/apiUrl'
 
 const marketTrend = () => {
 
@@ -14,7 +15,7 @@ const marketTrend = () => {
     const fetchSectorPerformance = async () => {
       try{
         setLoading(true)
-        const response = await fetch('http://localhost:8000/stock/market-trend/sector-performance')
+        const response = await fetch(`${API_URL}/stock/market-trend/sector-performance`)
         const data = await response.json();
         setSectorData(data)
         console.log(data)
