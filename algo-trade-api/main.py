@@ -7,7 +7,7 @@ from contextlib import asynccontextmanager
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
 from recap import refresh_news, get_cached_news
-from live_price import price_stream, get_symbols_info
+from live_price import price_stream, get_symbols_info, get_extra_info
 
 
 scheduler = BackgroundScheduler()
@@ -39,8 +39,6 @@ def news_getter_endpoint():
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to fetch summarized news: {e}")
 
-
-
 @app.get("/news")
 def get_news_endpoint():
     return get_cached_news()
@@ -49,6 +47,10 @@ def get_news_endpoint():
 @app.get("/live-price")
 def get_live_price_endpoint():
     return get_symbols_info()
+
+@app.get("/extra-info")
+def get_extra_info_endpoint():
+   return get_extra_info()
             
 
 @app.get("/")

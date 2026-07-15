@@ -21,23 +21,29 @@ const WatchlistStocks = ({ stocks }) => {
   </td>
 
   <td className="text-center py-4 pl-10">
+    <span className={`tracking-tighter font-data ${stocks.changePct > 0 ? 'text-primary' : 'text-destructive'}`}>
+      {stocks.changePct > 0 ? `+${stocks.changePct}%` : `${stocks.changePct}%`}
+    </span>
+  </td>
+
+  <td className="text-center py-4 pl-10">
     <span className="text-[14px] text-neutral-300 tracking-tighter font-data">{stocks.volume}</span>
   </td>
 
   <td className="text-center py-4 pl-10">
-    <span className="text-[14px] text-neutral-300 tracking-tighter font-data">{stocks.cap}</span>
+    <span className="text-[14px] text-neutral-300 tracking-tighter font-data">{stocks.marketCap}</span>
   </td>
 
   <td className="text-center py-4 pl-10">
     <span className="text-[14px] text-neutral-300 tracking-tighter font-data">{stocks.pe}</span>
   </td>
 
-  <td className="text-center py-4 pl-10">
-    <span className="text-[14px] text-neutral-300 tracking-tighter font-data">{stocks.beta}</span>
+  <td className="text-center py-4 pl-5">
+    <span className="text-[14px] text-neutral-300 tracking-tighter font-data">{stocks.divYield}</span>
   </td>
 
-  <td className="text-center py-4 pr-8">
-    <span className="text-[14px] text-neutral-300 tracking-tighter font-data">{stocks.divYield}</span>
+  <td className="text-center py-4 pr-10">
+    <span className="text-[14px] text-neutral-300 tracking-tighter font-data">{stocks.recommendKey}</span>
   </td>
 
 </tr>
