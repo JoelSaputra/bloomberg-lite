@@ -1,12 +1,13 @@
 
-import React from 'react'
-
-const App = () => {
-  return (
-    <div className="">
-      
-    </div>
-  )
+export async function getServerSideProps() {
+  return {
+    redirect: {
+      destination: '/commandCenter',
+      permanent: false,
+    },
+  }
 }
+
+const App = () => null
 
 export default App
