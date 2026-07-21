@@ -1,6 +1,7 @@
 import os
 import json
 import re
+import time
 import requests
 from dotenv import load_dotenv
 from google import genai
@@ -38,7 +39,7 @@ def filter_articles(articles):
             raise Exception("No articles to filter")
 
         interaction = gemini_client.interactions.create(
-            model="gemini-2.5-flash",
+            model="gemini-3.1-flash-lite",
             input=(
                 f"From all these {articles}, filter to the top 30 important news "
                 f"related to the stock market and macroeconomic impact and return "
@@ -89,18 +90,26 @@ def summarize_news(filtered_articles):
         raise
 
 
-def refresh_news():
+def refresh_news(max_attempts=3, delay_seconds=60):
     global news_cache
-    try:
-        articles = get_recap_news()
-        filtered_articles = filter_articles(articles)
-        summarized_articles = summarize_news(filtered_articles)
+    last_error = None
 
-        news_cache = summarized_articles
+    for attempt in range(1, max_attempts + 1):
+        try:
+            articles = get_recap_news()
+            filtered_articles = filter_articles(articles)
+            summarized_articles = summarize_news(filtered_articles)
 
-    except Exception as e:
-        print("Failed to refresh news:", e)
-        raise
+            news_cache = summarized_articles
+            return
+
+        except Exception as e:
+            last_error = e
+            print(f"Failed to refresh news (attempt {attempt}/{max_attempts}):", e)
+            if attempt < max_attempts:
+                time.sleep(delay_seconds)
+
+    raise last_error
 
 
 def get_cached_news():

@@ -9,26 +9,35 @@ import {useEffect, useState} from 'react'
 const commandCenter = () => {
 
     const [loading, setLoading] = useState(true)
-    const [marketPulseData, setMarketPulseData] = useState(null)
-    const [globalIndices, setGlobalIndices] = useState(null)
+    const [marketPulseData, setMarketPulseData] = useState([])
+    const [globalIndices, setGlobalIndices] = useState([])
+    const [error, setError] = useState(null)
 
     useEffect(() => {
         const fetchMarketPulse = async () => {
             try{
                 setLoading(true)
-                const [data1, data2] = await Promise.all([
-                    ( fetch(`${API_URL}/stock/commandCenter/market-pulse`)).then(r => r.json()),
-                    ( fetch(`${API_URL}/stock/commandCenter/global-heatmap`)).then(r => r.json())
+                setError(null)
+
+                const [res1, res2] = await Promise.all([
+                    fetch(`${API_URL}/stock/commandCenter/market-pulse`),
+                    fetch(`${API_URL}/stock/commandCenter/global-heatmap`)
                 ])
 
+                if (!res1.ok || !res2.ok) {
+                    throw new Error("Market data temporarily unavailable")
+                }
+
+                const [data1, data2] = await Promise.all([res1.json(), res2.json()])
+
                 setMarketPulseData(data1)
-                console.log(data1)
                 setGlobalIndices(data2)
-                console.log(data2)
             }
 
             catch(e){
-                alert("Error fetching data:", e)
+                setError(e.message)
+                setMarketPulseData([])
+                setGlobalIndices([])
             }
 
             finally{
@@ -40,6 +49,7 @@ const commandCenter = () => {
     }, [])
 
   if (loading) return <div>loading</div>
+  if (error) return <div className="p-10 text-center text-muted-foreground">{error} — try refreshing in a moment.</div>
 
   return (
     <div className="flex flex-col space-y-8">

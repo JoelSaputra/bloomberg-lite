@@ -12,23 +12,30 @@ export const SectorContext = createContext();
 const sectorIndex = () => {
   const [sectors, setSectors] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
   const [activeTab, setActiveTab] = useState('Technology')
 
 
   useEffect(() => {
     const fetchSectors = async () => {
       try {
+        setError(null)
         const res = await fetch(`${API_URL}/stock/market-trend/sector-performance`)
+        if (!res.ok) {
+          throw new Error("Sector data temporarily unavailable")
+        }
         const data = await res.json()
         setSectors(data.sectors)
       } catch (e) {
-        alert('Error fetching sector data:', e)
+        setError(e.message)
       } finally {
         setLoading(false)
       }
     }
     fetchSectors()
   }, [])
+
+  if (error) return <div className="p-10 text-center text-muted-foreground">{error} — try refreshing in a moment.</div>
 
   return (
 
