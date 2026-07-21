@@ -9,19 +9,23 @@ const StockScreener = ({tabs, activeTab}) => {
 
     const [screen, setScreen] = useState(null)
     const [loading, setLoading] = useState(true)
-    
+    const [error, setError] = useState(null)
+
 
     useEffect(() =>{
         const fetchTrendScreeners = async () => {
             try{
+                setError(null)
                 const response = await fetch (`${API_URL}/stock/market-trend/${activeTab}`)
+                if (!response.ok) {
+                    throw new Error("Screener data temporarily unavailable")
+                }
                 const data = await response.json()
                 setScreen(data)
-                console.log("screener-type:", data)
             }
 
             catch (error) {
-                alert("Error fetching trend screeners:", error)
+                setError(error.message)
           }
             finally{
                 setLoading(false)
@@ -31,7 +35,9 @@ const StockScreener = ({tabs, activeTab}) => {
 
     }, [activeTab])
 
-    if (loading || !screen) return null
+    if (loading) return null
+    if (error) return <div className="p-6 text-center text-muted-foreground text-sm">{error} — try refreshing in a moment.</div>
+    if (!screen || !Array.isArray(screen.data)) return null
 
   const stock = screen.data;
 

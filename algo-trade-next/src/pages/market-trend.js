@@ -11,21 +11,25 @@ const marketTrend = () => {
   const [activeTab, setActiveTab] = useState('top-losers')
   const [sectorData, setSectorData] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
   useEffect(() => {
     const fetchSectorPerformance = async () => {
       try{
         setLoading(true)
+        setError(null)
         const response = await fetch(`${API_URL}/stock/market-trend/sector-performance`)
+        if (!response.ok) {
+          throw new Error("Sector data temporarily unavailable")
+        }
         const data = await response.json();
         setSectorData(data)
-        console.log(data)
       }
       catch(e){
-        alert("Error fetching data:", e)
+        setError(e.message)
       }
       finally{
         setLoading(false)
-      } 
+      }
     }
     fetchSectorPerformance()
   }, [])
@@ -40,6 +44,7 @@ const marketTrend = () => {
 
 
   if(loading) return <div>loading</div>
+  if(error) return <div className="p-10 text-center text-muted-foreground">{error} — try refreshing in a moment.</div>
 
 
   return (
