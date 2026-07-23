@@ -500,7 +500,7 @@ MARKET_PULSE_TICKERS = {
 }
 
 @app.get("/stock/commandCenter/market-pulse")
-@ttl_cache(60)
+@ttl_cache(600)
 def get_market_pulse():
     try:
         market_pulse_result = []
