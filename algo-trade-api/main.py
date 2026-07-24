@@ -107,26 +107,27 @@ def get_keyStatistics(symbol:str=Path(min_length=1)):
 
 
 @app.get("/stock/{symbol}/profile")
-@ttl_cache(300)
+@ttl_cache(7200)
 def get_company_profile(symbol:str=Path(min_length=1)):
     try:
-        profile = fh.get_profile(symbol)
+        stock = yf.Ticker(symbol)
+        info = stock.info
 
-        if not profile or "name" not in profile:
+        if not info or "longName" not in info and "shortName" not in info:
             raise HTTPException(status_code=404, detail="Stock not found")
 
         return {
             "symbol": symbol,
-            "name": profile.get("name"),
-            "exchange": profile.get("exchange"),
-            "sector": profile.get("finnhubIndustry"),
-            "industry": None,
-            "employees": None,
-            "website": profile.get("weburl"),
-            "city": None,
-            "state": None,
-            "country": profile.get("country"),
-            "summary": None,
+            "name": info.get("longName") or info.get("shortName"),
+            "exchange": info.get("exchange"),
+            "sector": info.get("sector"),
+            "industry": info.get("industry"),
+            "employees": info.get("fullTimeEmployees"),
+            "website": info.get("website"),
+            "city": info.get("city"),
+            "state": info.get("state"),
+            "country": info.get("country"),
+            "summary": info.get("longBusinessSummary"),
         }
 
     except HTTPException:
@@ -137,7 +138,7 @@ def get_company_profile(symbol:str=Path(min_length=1)):
 
 
 @app.get("/stock/{symbol}/fundamental/overview/pe-history")
-@ttl_cache(3600)
+@ttl_cache(7200)
 def get_pe_history(symbol:str=Path(min_length=1)):
     try:
         stock = yf.Ticker(symbol)
@@ -169,7 +170,7 @@ def get_pe_history(symbol:str=Path(min_length=1)):
 
 
 @app.get("/stock/{symbol}/fundamental/income-statement")
-@ttl_cache(3600)
+@ttl_cache(7200)
 def get_income_statement(symbol: str = Path(min_length=1)):
     try:
         stock = yf.Ticker(symbol)
@@ -211,7 +212,7 @@ def get_income_statement(symbol: str = Path(min_length=1)):
 
     
 @app.get("/stock/{symbol}/fundamental/balance-sheet")
-@ttl_cache(3600)
+@ttl_cache(7200)
 def get_balance_sheet(symbol: str = Path(min_length=1)):
     try:
         stock = yf.Ticker(symbol)
@@ -252,7 +253,7 @@ def get_balance_sheet(symbol: str = Path(min_length=1)):
 
 
 @app.get("/stock/{symbol}/fundamental/cash-flow")
-@ttl_cache(3600)
+@ttl_cache(7200)
 def get_cash_flow(symbol: str = Path(min_length=1)):
     try:
         stock = yf.Ticker(symbol)
