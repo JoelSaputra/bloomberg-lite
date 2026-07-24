@@ -23,6 +23,9 @@ async def lifespan(app: FastAPI):
     scheduler.start()
     threading.Thread(target=refresh_news, daemon=True).start()
     threading.Thread(target=price_stream, daemon=True).start()
+    threading.Thread(target=get_sector_performance, daemon=True).start()
+    threading.Thread(target=get_market_pulse, daemon=True).start()
+    threading.Thread(target=get_global_indices, daemon=True).start()
     yield
 
 
