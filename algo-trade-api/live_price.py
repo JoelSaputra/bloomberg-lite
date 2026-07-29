@@ -1,3 +1,4 @@
+import time
 import yfinance as yf
 from cache import ttl_cache
 import finnhub_client as fh
@@ -12,9 +13,14 @@ def message_handler(message):
     symbols_info[message['id']] = message
 
 def price_stream():
-    with yf.WebSocket() as ws:
-        ws.subscribe(SYMBOLS)
-        ws.listen(message_handler)
+    while True:
+        try:
+            with yf.WebSocket() as ws:
+                ws.subscribe(SYMBOLS)
+                ws.listen(message_handler)
+        except Exception as e:
+            print("WebSocket dropped, reconnecting in 5s:", e)
+            time.sleep(5)
 
 
 def get_symbols_info():
