@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import SideBar from '../components/SideBar'
 import TopBar from '../components/TopBar'
 import { useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 
 
 
@@ -29,6 +30,7 @@ export default function App({ Component, pageProps }) {
 
           
         </div>
+        <Analytics />
       </div>
     )
 }
